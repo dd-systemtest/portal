@@ -3,1537 +3,3046 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Punch System - White Theme</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>VM Courier Logbook Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
+        /* Existing styles remain unchanged */
         :root {
-            --primary: #4a90e2;
-            --primary-light: #63b3ed;
-            --secondary: #6c757d;
-            --success: #38a169;
-            --danger: #e53e3e;
-            --warning: #d69e2e;
-            --light: #f7fafc;
-            --dark: #2d3748;
-            --border: #e2e8f0;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --primary: #2c3e50;
+            --secondary: #95a5a6;
+            --success: #27ae60;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --info: #3498db;
+            --light: #ffffff;
+            --dark: #2c3e50;
+            --soft-gray: #f8f9fa;
+            --border-light: #e9ecef;
         }
         
         body {
-            background: linear-gradient(135deg, #f7fafc, #edf2f7);
-            color: var(--dark);
+            background: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
-            padding: 20px;
+            color: #2c3e50;
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        header {
-            text-align: center;
-            padding: 20px 0;
-            margin-bottom: 30px;
-            border-bottom: 2px solid var(--border);
-        }
-        
-        header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
-        
-        header p {
-            font-size: 1.2rem;
-            color: var(--secondary);
-        }
-        
-        .card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: var(--shadow);
-            margin-bottom: 30px;
-            border: 1px solid var(--border);
-        }
-        
-        .card-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--border);
+        .login-container {
+            min-height: 100vh;
             display: flex;
             align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        
+        .login-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            padding: 3rem;
+            width: 100%;
+            max-width: 420px;
+            border: 1px solid var(--border-light);
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        
+        .login-header h2 {
             color: var(--primary);
-        }
-        
-        .card-title i {
-            margin-right: 15px;
-            font-size: 1.5rem;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
             font-weight: 600;
-            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .login-header p {
+            color: var(--secondary);
+            margin: 0;
+            font-weight: 400;
         }
         
         .form-control {
-            width: 100%;
-            padding: 14px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            background: white;
-            color: var(--dark);
-            font-size: 1rem;
-            transition: all 0.3s;
+            border-radius: 12px;
+            padding: 14px 18px;
+            border: 2px solid var(--border-light);
+            transition: all 0.3s ease;
+            background: #ffffff;
+            font-size: 0.95rem;
         }
         
         .form-control:focus {
-            outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3);
+            box-shadow: 0 0 0 0.2rem rgba(44,62,80,0.15);
+            background: #ffffff;
+        }
+        
+        .btn-login {
+            background: var(--primary);
+            border: none;
+            border-radius: 12px;
+            padding: 14px 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .btn-login:hover {
+            background: #34495e;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 25px rgba(44,62,80,0.15);
+        }
+        
+        .main-container {
+            background: #ffffff;
+            min-height: 100vh;
+        }
+        
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+            padding: 1.2rem 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .navbar-brand {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.6rem;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            margin: 0 8px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            color: var(--primary) !important;
+            padding: 8px 16px;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: var(--primary);
+            color: white !important;
+            transform: translateY(-1px);
+        }
+        
+        .card {
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            background: white;
+        }
+        
+        .card-header {
+            background: white;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 1.5rem 2rem;
+            border-bottom: 2px solid var(--soft-gray);
+            font-size: 1.1rem;
+        }
+        
+        .card-body {
+            padding: 2rem;
+            background: white;
         }
         
         .btn {
-            padding: 14px 28px;
-            border-radius: 8px;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
             border: none;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
         }
         
-        .btn i {
-            margin-right: 10px;
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         
         .btn-primary {
-            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            background: var(--primary);
             color: white;
         }
         
         .btn-primary:hover {
-            background: linear-gradient(to right, #3a80d2, #53a3dd);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+            background: #34495e;
         }
         
-        .btn-secondary {
-            background: linear-gradient(to right, var(--secondary), #868e96);
-            color: white;
-        }
-        
-        .btn-secondary:hover {
-            background: linear-gradient(to right, #5c656d, #767e86);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
-        }
-        
-        .btn-danger {
-            background: linear-gradient(to right, var(--danger), #fc8181);
-            color: white;
-        }
-        
-        .btn-danger:hover {
-            background: linear-gradient(to right, #d53737, #ec7171);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(229, 62, 62, 0.4);
-        }
-        
-        .btn-success {
-            background: linear-gradient(to right, var(--success), #68d391);
-            color: white;
-        }
-        
-        .btn-success:hover {
-            background: linear-gradient(to right, #2f9160, #58c381);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(56, 161, 105, 0.4);
-        }
-        
-        .btn-block {
-            display: block;
-            width: 100%;
-        }
-        
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 25px;
+        .badge {
             border-radius: 8px;
-            color: white;
-            font-weight: 600;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            transform: translateX(200%);
-            transition: transform 0.5s ease;
+            font-weight: 500;
+            padding: 6px 12px;
         }
         
-        .notification.show {
-            transform: translateX(0);
-        }
-        
-        .notification.success {
-            background: linear-gradient(to right, var(--success), #68d391);
-        }
-        
-        .notification.error {
-            background: linear-gradient(to right, var(--danger), #fc8181);
-        }
-        
-        .notification.warning {
-            background: linear-gradient(to right, var(--warning), #f6e05e);
-        }
-        
-        .notification.info {
-            background: linear-gradient(to right, var(--primary), var(--primary-light));
-        }
-        
-        .tabs {
-            display: flex;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .tab {
-            padding: 15px 25px;
-            cursor: pointer;
-            opacity: 0.7;
-            transition: all 0.3s;
-            border-bottom: 3px solid transparent;
-        }
-        
-        .tab.active {
-            opacity: 1;
-            border-bottom: 3px solid var(--primary);
-            color: var(--primary);
-            font-weight: 600;
-        }
-        
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: white;
-            border-radius: 10px;
+        .table {
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: var(--shadow);
+            border: 1px solid var(--border-light);
         }
         
-        th, td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
+        .table thead th {
+            background: var(--soft-gray);
+            border: none;
+            font-weight: 600;
+            color: var(--primary);
+            padding: 1rem;
+            font-size: 0.9rem;
         }
         
-        th {
-            background: var(--primary);
+        .table tbody tr {
+            border-bottom: 1px solid #f8f9fa;
+        }
+        
+        .table tbody tr:hover {
+            background: rgba(44,62,80,0.02);
+        }
+        
+        .table tbody td {
+            padding: 1rem;
+            vertical-align: middle;
+        }
+        
+        .entry-photo {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 2px solid var(--border-light);
+        }
+        
+        .committed-entry {
+            background: rgba(39,174,96,0.03);
+            border-left: 4px solid var(--success);
+        }
+        
+        .edit-request-badge {
+            background: var(--warning);
             color: white;
-            font-weight: 600;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 12px;
         }
         
-        tr:hover {
-            background: #f8fafc;
-        }
-        
-        .status {
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-        
-        .status.active {
-            background: rgba(56, 161, 105, 0.2);
-            color: var(--success);
-        }
-        
-        .status.inactive {
-            background: rgba(229, 62, 62, 0.2);
-            color: var(--danger);
-        }
-        
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .stat-card {
+        .activity-item {
+            border-left: 4px solid var(--primary);
             background: white;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow);
-        }
-        
-        .stat-card h3 {
-            font-size: 2.5rem;
-            margin: 10px 0;
-            background: linear-gradient(to right, var(--primary), var(--primary-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .stat-card p {
-            font-size: 1.1rem;
-            color: var(--secondary);
-        }
-        
-        .user-list {
-            max-height: 400px;
-            overflow-y: auto;
-            margin: 20px 0;
-            padding-right: 10px;
-        }
-        
-        .user-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            background: white;
-            transition: all 0.3s;
-            border: 1px solid var(--border);
-        }
-        
-        .user-item:hover {
-            background: #f8fafc;
-            transform: translateX(5px);
-            box-shadow: var(--shadow);
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            border-radius: 0 12px 12px 0;
+            border: 1px solid var(--border-light);
         }
         
         .user-avatar {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin-right: 15px;
+            background: var(--primary);
             color: white;
-        }
-        
-        .user-info {
-            flex: 1;
-        }
-        
-        .user-name {
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: var(--dark);
-        }
-        
-        .user-role {
-            font-size: 0.9rem;
-            color: var(--secondary);
-        }
-        
-        .action-buttons {
             display: flex;
-            gap: 10px;
-        }
-        
-        .action-btn {
-            padding: 8px 15px;
-            border-radius: 5px;
-            border: none;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .action-btn:hover {
-            transform: translateY(-2px);
-        }
-        
-        .action-btn.view {
-            background: rgba(74, 144, 226, 0.1);
-            color: var(--primary);
-        }
-        
-        .action-btn.edit {
-            background: rgba(237, 137, 54, 0.1);
-            color: #ed8936;
-        }
-        
-        .action-btn.reset {
-            background: rgba(229, 62, 62, 0.1);
-            color: var(--danger);
-        }
-        
-        .action-btn.delete {
-            background: rgba(229, 62, 62, 0.1);
-            color: var(--danger);
-        }
-        
-        .hidden {
-            display: none;
-        }
-        
-        .two-factor {
-            margin-top: 20px;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            border: 1px dashed var(--border);
-        }
-        
-        .two-factor h3 {
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-            color: var(--primary);
-        }
-        
-        .otp-container {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .otp-input {
-            width: 50px;
-            height: 50px;
-            text-align: center;
-            font-size: 1.5rem;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            background: white;
-            color: var(--dark);
-        }
-        
-        .resend-otp {
-            margin-top: 15px;
-            text-align: center;
-            color: var(--primary);
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-        
-        .resend-otp:hover {
-            text-decoration: underline;
-        }
-        
-        .password-strength {
-            margin-top: 10px;
-            height: 5px;
-            border-radius: 5px;
-            background: var(--border);
-            overflow: hidden;
-        }
-        
-        .strength-meter {
-            height: 100%;
-            width: 0;
-            transition: width 0.3s, background 0.3s;
-        }
-        
-        .strength-text {
-            font-size: 0.8rem;
-            margin-top: 5px;
-            color: var(--secondary);
-        }
-        
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            justify-content: center;
             align-items: center;
-        }
-        
-        .modal-content {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            width: 90%;
-            max-width: 600px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            justify-content: center;
+            font-weight: 600;
         }
         
         .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--border);
+            background: var(--primary);
+            color: white;
+            border-radius: 16px 16px 0 0;
         }
         
-        .modal-title {
-            font-size: 1.5rem;
+        .modal-content {
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+        }
+        
+        .photo-preview {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 10px;
+            margin-top: 10px;
+            border: 2px solid var(--border-light);
+        }
+        
+        .remarks-list {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 12px;
+            background: var(--soft-gray);
+        }
+        
+        .remark-item {
+            background: white;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        
+        .remark-author {
+            font-weight: 600;
             color: var(--primary);
+            font-size: 0.9rem;
         }
         
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
+        .remark-time {
             color: var(--secondary);
+            font-size: 0.8rem;
         }
         
-        .modal-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border);
+        .page-section {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
         }
         
-        .user-info-display {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
+        .page-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
         }
         
-        .user-info-avatar {
-            width: 70px;
-            height: 70px;
+        .stats-card {
+            background: linear-gradient(135deg, var(--primary), #34495e);
+            color: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 25px rgba(44,62,80,0.15);
+            transition: transform 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stats-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--danger);
+            color: white;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            width: 22px;
+            height: 22px;
+            font-size: 0.75rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 1.8rem;
-            margin-right: 20px;
-            color: white;
-        }
-        
-        .user-info-details {
-            flex: 1;
-        }
-        
-        .user-info-name {
-            font-size: 1.5rem;
             font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 5px;
         }
         
-        .user-info-role {
-            font-size: 1rem;
-            color: var(--secondary);
+        .container {
+            max-width: 1200px;
         }
         
-        .user-info-ip {
-            font-size: 0.9rem;
-            color: var(--secondary);
-            margin-top: 5px;
-        }
-        
-        .user-info-time {
-            font-size: 0.9rem;
-            color: var(--secondary);
-        }
-        
-        .edit-form {
-            margin-top: 20px;
-        }
-        
-        .search-bar {
-            display: flex;
-            margin-bottom: 20px;
-        }
-        
-        .search-input {
-            flex: 1;
-            padding: 14px;
-            border-radius: 8px 0 0 8px;
-            border: 1px solid var(--border);
-            background: white;
-            color: var(--dark);
-            font-size: 1rem;
-        }
-        
-        .search-btn {
-            padding: 14px 20px;
-            border-radius: 0 8px 8px 0;
-            background: var(--primary);
-            color: white;
+        .alert {
+            border-radius: 12px;
             border: none;
-            cursor: pointer;
+            padding: 1rem 1.5rem;
         }
         
-        @media (max-width: 768px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .user-item {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .user-avatar {
-                margin-right: 0;
-                margin-bottom: 10px;
-            }
-            
-            .action-buttons {
-                margin-top: 10px;
-                justify-content: center;
-            }
+        .form-select {
+            border-radius: 12px;
+            padding: 14px 18px;
+            border: 2px solid var(--border-light);
+            background: white;
+        }
+        
+        .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.2rem rgba(44,62,80,0.15);
+        }
+        
+        .sync-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+            z-index: 1000;
+        }
+        
+        .sync-indicator.show {
+            display: block;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .entry-id {
+            font-family: monospace;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(44,62,80,0.05);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        .debug-panel {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            max-width: 300px;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+            z-index: 9999;
+        }
+        
+        .debug-panel.show {
+            display: block;
+        }
+        
+        .status-badge {
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+        
+        .status-pending {
+            background-color: var(--warning);
+            color: white;
+        }
+        
+        .status-in-transit {
+            background-color: var(--info);
+            color: white;
+        }
+        
+        .status-delivered {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .status-return {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .approval-section {
+            background: rgba(52, 152, 219, 0.05);
+            border: 1px solid var(--info);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .approval-header {
+            color: var(--info);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .management-dropdown {
+            position: relative;
+        }
+        
+        .management-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            padding: 0.5rem 0;
+            min-width: 200px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .management-dropdown:hover .management-menu {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        
+        .management-item {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .management-item:hover {
+            background: var(--soft-gray);
+            color: var(--primary);
+        }
+        
+        .admin-approvals-card {
+            border-left: 4px solid var(--warning);
+        }
+        
+        .request-card {
+            transition: all 0.3s ease;
+        }
+        
+        .request-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        
+        .btn-warning {
+            background: var(--warning);
+            color: white;
+        }
+        
+        .btn-warning:hover {
+            background: #e67e22;
+        }
+        
+        .real-time-indicator {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: var(--info);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: none;
+            z-index: 1000;
+        }
+        
+        .real-time-indicator.show {
+            display: block;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        .session-timer {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(44, 62, 80, 0.8);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: none;
+            z-index: 1000;
+        }
+        
+        .session-timer.show {
+            display: block;
+        }
+        
+        .admin-contact-btn {
+            background: var(--secondary);
+            color: white;
+            cursor: not-allowed;
+        }
+        
+        .admin-contact-btn:hover {
+            background: var(--secondary);
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .uncommitted-indicator {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--warning);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .btn:disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .permission-info {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            margin-top: 0.25rem;
+        }
+        
+        .system-remark {
+            background-color: #e3f2fd;
+            border-left-color: #2196f3;
+        }
+        
+        .system-remark .remark-author {
+            color: #2196f3;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1><i class="fas fa-clock"></i> Advanced Punch System</h1>
-            <p>Secure time tracking and attendance management</p>
-        </header>
-        
-        <!-- Login Section -->
-        <div class="card" id="login-section">
-            <h2 class="card-title"><i class="fas fa-sign-in-alt"></i> Login</h2>
-            
-            <div class="form-group">
-                <label for="user-id">User ID</label>
-                <input type="text" id="user-id" class="form-control" placeholder="Enter your user ID (e.g., 0001)">
+    <!-- Login Page -->
+    <div id="loginPage" class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <i class="fas fa-clipboard-list fa-3x text-primary mb-3"></i>
+                <h2>VM Courier Logbook</h2>
+                <p>Village Mall Portal</p>
             </div>
-            
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" class="form-control" placeholder="Enter your password">
-            </div>
-            
-            <div class="form-group">
-                <label>
-                    <input type="checkbox" id="two-factor-toggle"> Enable Two-Factor Authentication
-                </label>
-            </div>
-            
-            <div class="two-factor hidden" id="two-factor-section">
-                <h3>Two-Factor Authentication</h3>
-                <p>Enter the 6-digit code sent to your registered device</p>
-                
-                <div class="otp-container">
-                    <input type="text" class="otp-input" maxlength="1">
-                    <input type="text" class="otp-input" maxlength="1">
-                    <input type="text" class="otp-input" maxlength="1">
-                    <input type="text" class="otp-input" maxlength="1">
-                    <input type="text" class="otp-input" maxlength="1">
-                    <input type="text" class="otp-input" maxlength="1">
+            <form id="loginForm">
+                <div class="mb-3">
+                    <label for="loginId" class="form-label">User ID</label>
+                    <input type="text" class="form-control" id="loginId" required>
                 </div>
-                
-                <div class="resend-otp">Resend Code</div>
-            </div>
-            
-            <button class="btn btn-primary btn-block" id="login-btn">
-                <i class="fas fa-sign-in-alt"></i> Login
-            </button>
-        </div>
-        
-        <!-- Punch Section -->
-        <div class="card hidden" id="punch-section">
-            <h2 class="card-title"><i class="fas fa-hand-paper"></i> Punch System</h2>
-            
-            <div class="user-info">
-                <h3>Welcome, <span id="user-name">Danial Danish</span></h3>
-                <p>Role: <span id="user-role">Head of IT Development</span></p>
-                <p>Your IP: <span id="user-ip">Loading...</span></p>
-                <p>Current Time: <span id="current-time">Loading...</span></p>
-            </div>
-            
-            <div class="tabs">
-                <div class="tab active" data-tab="punch-in-out">Punch In/Out</div>
-                <div class="tab" data-tab="attendance">My Attendance</div>
-            </div>
-            
-            <div class="tab-content active" id="punch-in-out">
-                <div class="form-group">
-                    <button class="btn btn-success btn-block" id="punch-in-btn">
-                        <i class="fas fa-sign-in-alt"></i> Punch In
+                <div class="mb-3">
+                    <label for="loginPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="loginPassword" required>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-login">
+                        <i class="fas fa-sign-in-alt me-2"></i>Login
                     </button>
                 </div>
-                
-                <div class="form-group">
-                    <button class="btn btn-danger btn-block" id="punch-out-btn">
-                        <i class="fas fa-sign-out-alt"></i> Punch Out
-                    </button>
+            </form>
+            <div id="loginError" class="alert alert-danger mt-3" style="display: none;"></div>
+        </div>
+    </div>
+    <!-- Main Application -->
+    <div id="mainApp" class="main-container" style="display: none;">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <span class="navbar-brand">
+                    <i class="fas fa-clipboard-list me-2"></i>VM Courier Logbook
+                </span>
+                <div class="navbar-nav ms-auto">
+                    <!-- Management Dropdown -->
+                    <div class="nav-item management-dropdown me-2">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-cogs me-1"></i>Management
+                        </a>
+                        <div class="management-menu">
+                            <a class="management-item" href="#" onclick="showPage('logbook')">
+                                <i class="fas fa-book me-2"></i>Logbook
+                            </a>
+                            <a class="management-item" href="#" onclick="showPage('users')">
+                                <i class="fas fa-users me-2"></i>Users
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Admin Approvals (only visible to admins) -->
+                    <a class="nav-link me-2" id="adminApprovalsLink" href="#" onclick="showPage('adminApprovals')" style="display: none;">
+                        <i class="fas fa-clipboard-check me-1"></i>Admin Approvals
+                        <span id="adminApprovalBadge" class="notification-badge" style="display: none;">0</span>
+                    </a>
+                    
+                    <!-- Profile Dropdown -->
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown">
+                            <div class="user-avatar d-inline-flex me-2" id="userAvatar"></div>
+                            <span id="currentUserName"></span>
+                            <span id="editRequestBadge" class="notification-badge" style="display: none;">0</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="toggleDebug()">
+                                <i class="fas fa-bug me-2"></i>Toggle Debug
+                            </a></li>
+                            <li><a class="dropdown-item" href="#" onclick="forceSync()">
+                                <i class="fas fa-sync me-2"></i>Force Sync Now
+                            </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="logout()">
+                                <i class="fas fa-sign-out-alt me-2"></i>Logout
+                            </a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            
-            <div class="tab-content" id="attendance">
-                <h3>Recent Attendance</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Punch In</th>
-                            <th>Punch Out</th>
-                            <th>Duration</th>
-                        </tr>
-                    </thead>
-                    <tbody id="attendance-records">
-                        <!-- Attendance records will be populated dynamically -->
-                    </tbody>
-                </table>
-            </div>
-            
-            <button class="btn btn-secondary" id="logout-btn">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </button>
+        </nav>
+        
+        <!-- Real-time Sync Indicator -->
+        <div id="realTimeIndicator" class="real-time-indicator">
+            <i class="fas fa-sync-alt me-1"></i>Syncing...
         </div>
         
-        <!-- Admin Dashboard -->
-        <div class="card hidden" id="admin-section">
-            <h2 class="card-title"><i class="fas fa-tachometer-alt"></i> Admin Dashboard</h2>
-            
-            <div class="user-info-display">
-                <div class="user-info-avatar" id="admin-avatar">DD</div>
-                <div class="user-info-details">
-                    <div class="user-info-name" id="admin-name">Danial Danish</div>
-                    <div class="user-info-role" id="admin-role">Head of IT Development</div>
-                    <div class="user-info-ip" id="admin-ip">Your IP: Loading...</div>
-                    <div class="user-info-time" id="admin-time">Current Time: Loading...</div>
-                </div>
-            </div>
-            
-            <div class="dashboard-grid">
-                <div class="stat-card">
-                    <i class="fas fa-users fa-2x" style="color: var(--primary);"></i>
-                    <h3 id="total-users">12</h3>
-                    <p>Total Crew Members</p>
-                </div>
-                
-                <div class="stat-card">
-                    <i class="fas fa-clock fa-2x" style="color: var(--primary);"></i>
-                    <h3 id="on-time-rate">87%</h3>
-                    <p>On-Time Rate</p>
-                </div>
-                
-                <div class="stat-card">
-                    <i class="fas fa-exclamation-triangle fa-2x" style="color: var(--primary);"></i>
-                    <h3 id="recent-alerts">3</h3>
-                    <p>Recent Alerts</p>
-                </div>
-            </div>
-            
-            <div class="search-bar">
-                <input type="text" class="search-input" id="search-users" placeholder="Search users...">
-                <button class="search-btn" id="add-user-btn">
-                    <i class="fas fa-plus"></i> Add User
-                </button>
-            </div>
-            
-            <div class="tabs">
-                <div class="tab active" data-tab="attendance-reports">Attendance Reports</div>
-                <div class="tab" data-tab="user-management">User Management</div>
-                <div class="tab" data-tab="system-logs">System Logs</div>
-            </div>
-            
-            <div class="tab-content active" id="attendance-reports">
-                <h3>Department Attendance</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Department</th>
-                            <th>Total Hours</th>
-                            <th>Avg. Hours</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="department-stats">
-                        <!-- Department stats will be populated dynamically -->
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="tab-content" id="user-management">
-                <h3>Crew Members</h3>
-                <div class="user-list" id="user-list">
-                    <!-- User list will be populated dynamically -->
-                </div>
-            </div>
-            
-            <div class="tab-content" id="system-logs">
-                <h3>Audit Logs</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Timestamp</th>
-                            <th>User</th>
-                            <th>Action</th>
-                            <th>IP Address</th>
-                        </tr>
-                    </thead>
-                    <tbody id="audit-logs">
-                        <!-- Audit logs will be populated dynamically -->
-                    </tbody>
-                </table>
-            </div>
-            
-            <button class="btn btn-secondary" id="admin-logout-btn">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </button>
+        <!-- Session Timer -->
+        <div id="sessionTimer" class="session-timer">
+            <i class="fas fa-clock me-1"></i>Session expires in: <span id="sessionTimeLeft">5:00</span>
         </div>
         
-        <!-- Notification -->
-        <div class="notification" id="notification">
-            <span id="notification-message"></span>
+        <!-- Logbook Page -->
+        <div id="logbookPage" class="page-section active">
+            <div class="container mt-4">
+                <!-- Stats Cards -->
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <div class="stats-card">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <div class="stats-number" id="totalEntries">0</div>
+                                    <div>Total Entries</div>
+                                </div>
+                                <i class="fas fa-clipboard-list fa-2x opacity-75"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stats-card">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <div class="stats-number" id="committedEntries">0</div>
+                                    <div>Committed</div>
+                                </div>
+                                <i class="fas fa-lock fa-2x opacity-75"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stats-card">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <div class="stats-number" id="myEntries">0</div>
+                                    <div>My Entries</div>
+                                </div>
+                                <i class="fas fa-user fa-2x opacity-75"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stats-card">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <div class="stats-number" id="pendingRequests">0</div>
+                                    <div>Edit Requests</div>
+                                </div>
+                                <i class="fas fa-exclamation-triangle fa-2x opacity-75"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add Entry Button -->
+                <div class="row mb-3">
+                    <div class="col">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#entryModal" onclick="openAddEntryModal()">
+                            <i class="fas fa-plus me-2"></i>Add New Entry
+                        </button>
+                        <button id="viewDeletedBtn" class="btn btn-outline-secondary ms-2" onclick="toggleDeletedEntries()" style="display: none;">
+                            <i class="fas fa-trash me-2"></i>View Deleted Entries
+                        </button>
+                    </div>
+                </div>
+                <!-- Logbook Entries -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-list me-2"></i>Logbook Entries
+                            <span id="entriesTitle">All Entries</span>
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Date</th>
+                                        <th>PIC</th>
+                                        <th>Destination</th>
+                                        <th>Cashbill*</th>
+                                        <th>Consignment*</th>
+                                        <th>Courier Type</th>
+                                        <th>Status</th>
+                                        <th>Photo</th>
+                                        <th>Remarks</th>
+                                        <th>Entry Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="entriesTableBody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- User Management Page -->
+        <div id="usersPage" class="page-section">
+            <div class="container mt-4">
+                <div class="row">
+                    <!-- User Profile/List -->
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-users me-2"></i><span id="usersTitle">User Management</span>
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="usersList"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Activity Log (Admin Only) -->
+                    <div class="col-md-4" id="activityLogSection" style="display: none;">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-history me-2"></i>Recent Activity
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="activityLog" style="max-height: 400px; overflow-y: auto;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
-        <!-- Add/Edit User Modal -->
-        <div class="modal" id="user-modal">
+        <!-- Admin Approvals Page -->
+        <div id="adminApprovalsPage" class="page-section">
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card admin-approvals-card">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-clipboard-check me-2"></i>Admin Approvals
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <!-- Edit Requests Section -->
+                                <div class="approval-section">
+                                    <h6 class="approval-header">
+                                        <i class="fas fa-exclamation-triangle me-2"></i>Pending Edit Requests
+                                        <span class="badge bg-warning ms-2" id="editRequestsCount">0</span>
+                                    </h6>
+                                    <div id="editRequestsList">
+                                        <p class="text-muted">No pending edit requests.</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Uncommitted Entries Section -->
+                                <div class="approval-section">
+                                    <h6 class="approval-header">
+                                        <i class="fas fa-clock me-2"></i>Entries Awaiting Re-commit Approval
+                                        <span class="badge bg-info ms-2" id="uncommittedCount">0</span>
+                                    </h6>
+                                    <div id="uncommittedEntriesList">
+                                        <p class="text-muted">No entries awaiting re-commit approval.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Entry Modal -->
+    <div class="modal fade" id="entryModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="modal-title">Add New User</h3>
-                    <button class="close-modal" id="close-modal">&times;</button>
+                    <h5 class="modal-title" id="entryModalTitle">Add New Entry</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="user-form">
-                        <div class="form-group">
-                            <label for="modal-user-id">User ID</label>
-                            <input type="text" id="modal-user-id" class="form-control" placeholder="Enter user ID">
-                        </div>
-                        <div class="form-group">
-                            <label for="modal-name">Name</label>
-                            <input type="text" id="modal-name" class="form-control" placeholder="Enter full name">
-                        </div>
-                        <div class="form-group">
-                            <label for="modal-password">Password</label>
-                            <input type="password" id="modal-password" class="form-control" placeholder="Enter password">
-                            <div class="password-strength">
-                                <div class="strength-meter" id="strength-meter"></div>
+                    <form id="entryForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="entryDate" class="form-label">Date</label>
+                                    <input type="date" class="form-control" id="entryDate" required>
+                                </div>
                             </div>
-                            <div class="strength-text" id="strength-text">Password strength</div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="entryPIC" class="form-label">PIC (Person in Charge)</label>
+                                    <input type="text" class="form-control" id="entryPIC" readonly>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="modal-role">Role</label>
-                            <select id="modal-role" class="form-control">
-                                <option value="Crew Member">Crew Member</option>
-                                <option value="Head of IT Development">Head of IT Development</option>
-                                <option value="HR Manager">HR Manager</option>
-                                <option value="Operations Manager">Operations Manager</option>
+                        <div class="mb-3">
+                            <label for="entryDestination" class="form-label">Destination Trade In Partner</label>
+                            <select class="form-select" id="entryDestination" required>
+                                <option value="">Select Destination</option>
+                                <option value="ENB">ENB</option>
+                                <option value="Remobie">Remobie</option>
+                                <option value="Miifix">Miifix</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="modal-department">Department</label>
-                            <select id="modal-department" class="form-control">
-                                <option value="IT">IT</option>
-                                <option value="HR">HR</option>
-                                <option value="Operations">Operations</option>
-                                <option value="Marketing">Marketing</option>
-                            </select>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="entryCashbill" class="form-label">Cashbill Number *</label>
+                                    <input type="text" class="form-control" id="entryCashbill" required placeholder="Enter cashbill number">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="entryConsignment" class="form-label">Consignment Number *</label>
+                                    <input type="text" class="form-control" id="entryConsignment" required placeholder="Enter consignment number">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="entryCourierType" class="form-label">Courier Type</label>
+                                    <select class="form-select" id="entryCourierType" required>
+                                        <option value="">Select Courier</option>
+                                        <option value="eDHL">eDHL</option>
+                                        <option value="Poslaju">Poslaju</option>
+                                        <option value="GDex">GDex</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="entryStatus" class="form-label">Status</label>
+                                    <select class="form-select" id="entryStatus" required>
+                                        <option value="">Select Status</option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="In transit">In transit</option>
+                                        <option value="Delivered">Delivered</option>
+                                        <option value="Return">Return</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="entryPhoto" class="form-label">Courier Photo Proof</label>
+                            <input type="file" class="form-control" id="entryPhoto" accept="image/*">
+                            <div id="photoPreview"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="entryRemarks" class="form-label">Initial Remarks (Optional)</label>
+                            <textarea class="form-control" id="entryRemarks" rows="3"></textarea>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" id="cancel-modal">Cancel</button>
-                    <button class="btn btn-primary" id="save-user">Save User</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="saveEntry()">
+                        <span id="saveButtonText">Save Entry</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Remarks Modal -->
+    <div class="modal fade" id="remarksModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Entry Remarks</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="remarks-list" id="remarksList"></div>
+                    <div class="mt-3">
+                        <label for="newRemark" class="form-label">Add New Remark</label>
+                        <textarea class="form-control" id="newRemark" rows="3" placeholder="Enter your remark..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="addRemark()">Add Remark</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Request Modal -->
+    <div class="modal fade" id="editRequestModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Request Edit Permission</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>This entry is committed and locked. Please provide a reason for requesting edit permission:</p>
+                    <textarea class="form-control" id="editRequestReason" rows="4" placeholder="Reason for edit request..." required></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-warning" onclick="submitEditRequest()">Submit Request</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Photo View Modal -->
+    <div class="modal fade" id="photoModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Courier Photo Proof</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="modalPhoto" class="img-fluid" style="max-height: 70vh;">
                 </div>
             </div>
         </div>
     </div>
     
+    <!-- Admin Contact Modal -->
+    <div class="modal fade" id="adminContactModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Admin Contact Required</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>This entry is committed and locked.</strong><br>
+                        To edit this entry, please contact the administrator:<br><br>
+                        <strong>Danial Danish</strong><br>
+                        ID: 7434<br>
+                        <i class="fas fa-phone me-2"></i> Contact for uncommit permission
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sync Indicator -->
+    <div id="syncIndicator" class="sync-indicator">
+        <div class="loading-spinner me-2"></div>Syncing with Google Sheets...
+    </div>
+    
+    <!-- Debug Panel -->
+    <div id="debugPanel" class="debug-panel">
+        <div><strong>Debug Panel</strong></div>
+        <div id="debugContent"></div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // DOM Elements
-        const loginSection = document.getElementById('login-section');
-        const punchSection = document.getElementById('punch-section');
-        const adminSection = document.getElementById('admin-section');
-        const twoFactorToggle = document.getElementById('two-factor-toggle');
-        const twoFactorSection = document.getElementById('two-factor-section');
-        const loginBtn = document.getElementById('login-btn');
-        const logoutBtn = document.getElementById('logout-btn');
-        const adminLogoutBtn = document.getElementById('admin-logout-btn');
-        const punchInBtn = document.getElementById('punch-in-btn');
-        const punchOutBtn = document.getElementById('punch-out-btn');
-        const notification = document.getElementById('notification');
-        const notificationMessage = document.getElementById('notification-message');
-        const tabs = document.querySelectorAll('.tab');
-        const tabContents = document.querySelectorAll('.tab-content');
-        const otpInputs = document.querySelectorAll('.otp-input');
-        const resendOtp = document.querySelector('.resend-otp');
-        const userModal = document.getElementById('user-modal');
-        const closeModal = document.getElementById('close-modal');
-        const cancelModal = document.getElementById('cancel-modal');
-        const saveUserBtn = document.getElementById('save-user');
-        const addUserBtn = document.getElementById('add-user-btn');
-        const modalTitle = document.getElementById('modal-title');
-        const userForm = document.getElementById('user-form');
-        const searchUsers = document.getElementById('search-users');
-        const userList = document.getElementById('user-list');
-        const attendanceRecords = document.getElementById('attendance-records');
-        const auditLogs = document.getElementById('audit-logs');
-        const departmentStats = document.getElementById('department-stats');
-        const strengthMeter = document.getElementById('strength-meter');
-        const strengthText = document.getElementById('strength-text');
-        const modalPassword = document.getElementById('modal-password');
-        const currentTimeElement = document.getElementById('current-time');
-        const adminTimeElement = document.getElementById('admin-time');
-        const userIpElement = document.getElementById('user-ip');
-        const adminIpElement = document.getElementById('admin-ip');
+        // Malaysia Time Helper Functions
+        function getMalaysiaTime() {
+            const now = new Date();
+            const malaysiaTime = new Date(now.getTime() + (8 * 60 * 60 * 1000) + (now.getTimezoneOffset() * 60 * 1000));
+            return malaysiaTime;
+        }
+        function formatMalaysiaDateTime(date) {
+            const options = {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false,
+                timeZone: 'Asia/Kuala_Lumpur'
+            };
+            return new Date(date).toLocaleString('en-MY', options);
+        }
+        function formatMalaysiaDate(date) {
+            const options = {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                timeZone: 'Asia/Kuala_Lumpur'
+            };
+            return new Date(date).toLocaleDateString('en-MY', options);
+        }
         
-        // Mock user data with localStorage persistence
-        let users = JSON.parse(localStorage.getItem('punch_users')) || [
-            {
-                id: '0001',
-                name: 'Danial Danish',
-                password: 'Dd123', // In real system, this would be hashed
-                role: 'Head of IT Development',
-                department: 'IT',
-                status: 'active'
-            },
-            {
-                id: '0002',
-                name: 'John Doe',
-                password: 'Password123!',
-                role: 'Crew Member',
-                department: 'IT',
-                status: 'active'
-            },
-            {
-                id: '0003',
-                name: 'Alice Smith',
-                password: 'Password123!',
-                role: 'Crew Member',
-                department: 'HR',
-                status: 'active'
-            }
-        ];
-        
-        // Mock attendance data
-        let attendanceData = JSON.parse(localStorage.getItem('punch_attendance')) || [
-            { userId: '0002', date: '2023-08-15', punchIn: '08:30:00', punchOut: '17:15:00', duration: '8h 45m' },
-            { userId: '0002', date: '2023-08-14', punchIn: '08:45:00', punchOut: '17:30:00', duration: '8h 45m' },
-            { userId: '0002', date: '2023-08-13', punchIn: '08:15:00', punchOut: '17:00:00', duration: '8h 45m' },
-            { userId: '0003', date: '2023-08-15', punchIn: '09:00:00', punchOut: '17:30:00', duration: '8h 30m' },
-            { userId: '0003', date: '2023-08-14', punchIn: '09:15:00', punchOut: '17:45:00', duration: '8h 30m' }
-        ];
-        
-        // Mock audit logs
-        let auditLogData = JSON.parse(localStorage.getItem('punch_audit_logs')) || [
-            { timestamp: '2023-08-15 08:30:45', user: 'Danial Danish', action: 'System Login', ip: '127.0.0.1' },
-            { timestamp: '2023-08-15 08:32:12', user: 'John Doe', action: 'Punch In', ip: '127.0.0.1' },
-            { timestamp: '2023-08-15 08:35:30', user: 'Alice Smith', action: 'Password Change', ip: '127.0.0.1' },
-            { timestamp: '2023-08-15 08:40:15', user: 'Robert Johnson', action: 'Punch In', ip: '127.0.0.1' },
-            { timestamp: '2023-08-15 08:45:22', user: 'Danial Danish', action: 'User Management', ip: '127.0.0.1' }
-        ];
-        
-        // Current user
+        // Application State
         let currentUser = null;
+        let currentEntryId = null;
+        let currentRemarksEntryId = null;
+        let showingDeleted = false;
+        let isOnline = navigator.onLine;
+        let debugMode = false;
+        let syncInterval = null;
+        let sessionTimeout = null;
+        let sessionTimeLeft = 300; // 5 minutes in seconds
         
-        // Real IP address
-        let userIP = '127.0.0.1'; // Will be updated with real IP
+        // Google Sheets Integration
+        const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbwe84Ec0M5f_0S2QwPWwIrNeGYblfk0AfacEGLTQdRsoRRuP1kXnqrpGXGUrLzyvuyX/exec";
         
-        // Show notification
-        function showNotification(message, type = 'success') {
-            notificationMessage.textContent = message;
-            notification.className = `notification ${type} show`;
+        // Data Storage
+        let users = [
+            { id: '7434', name: 'Danial Danish', role: 'admin', password: 'Danial05', canCommit: true },
+            { id: '4545', name: 'Ain Ismail', role: 'TL', password: 'Ain123', canCommit: true },
+            { id: '5546', name: 'Cindamani Anam', role: 'RSE', password: 'Ann123', canCommit: true },
+            { id: '7701', name: 'Syarifuddin Mat Razali', role: 'RSA', password: 'Din123', canCommit: false },
+            { id: '7407', name: 'Nur Sabrina', role: 'RSA', password: 'Sab123', canCommit: false },
+            { id: '7940', name: 'Eisya Nasir', role: 'RSA', password: 'Eisya123', canCommit: false },
+            { id: '6435', name: 'Lee Shean Yi', role: 'RSA', password: 'Lee123', canCommit: false },
+            { id: '0690', name: 'Kavindhran', role: 'AH', password: 'Kavin123', canCommit: true }
+        ];
+        
+        let logbookEntries = [];
+        let deletedEntries = [];
+        let editRequests = [];
+        let activityLogs = [];
+        let entryRemarks = {};
+        let lastSyncTime = null;
+        
+        // Debug function
+        function debugLog(message) {
+            if (debugMode) {
+                console.log(message);
+                const debugContent = document.getElementById('debugContent');
+                const timestamp = new Date().toLocaleTimeString();
+                debugContent.innerHTML += `<div>[${timestamp}] ${message}</div>`;
+                debugContent.scrollTop = debugContent.scrollHeight;
+            }
+        }
+        
+        function toggleDebug() {
+            debugMode = !debugMode;
+            const debugPanel = document.getElementById('debugPanel');
+            debugPanel.classList.toggle('show', debugMode);
+            if (debugMode) {
+                debugLog('Debug mode enabled');
+                debugLog('Current user: ' + (currentUser ? currentUser.name : 'None'));
+                debugLog('Logbook entries: ' + logbookEntries.length);
+                debugLog('Edit requests: ' + editRequests.length);
+            }
+        }
+        
+        // Initialize Application
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+            checkLoginStatus();
+            
+            // Monitor online/offline status
+            window.addEventListener('online', () => {
+                isOnline = true;
+                showSuccessMessage('You are back online!');
+                syncWithGoogleSheets();
+            });
+            
+            window.addEventListener('offline', () => {
+                isOnline = false;
+                showErrorMessage('You are offline. Changes will be saved locally and synced when you reconnect.');
+            });
+            
+            // Set up real-time sync interval
+            setupRealTimeSync();
+            
+            // Set up session timeout
+            setupSessionTimeout();
+        });
+        
+        // Session timeout management
+        function setupSessionTimeout() {
+            // Update session timer display
+            updateSessionTimerDisplay();
+            
+            // Set up interval to update session timer every second
+            setInterval(() => {
+                if (currentUser) {
+                    sessionTimeLeft--;
+                    updateSessionTimerDisplay();
+                    
+                    if (sessionTimeLeft <= 0) {
+                        logout();
+                    }
+                }
+            }, 1000);
+            
+            // Reset session timeout on user activity
+            document.addEventListener('mousemove', resetSessionTimeout);
+            document.addEventListener('keypress', resetSessionTimeout);
+            document.addEventListener('click', resetSessionTimeout);
+            document.addEventListener('scroll', resetSessionTimeout);
+        }
+        
+        function updateSessionTimerDisplay() {
+            const minutes = Math.floor(sessionTimeLeft / 60);
+            const seconds = sessionTimeLeft % 60;
+            const timeString = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            
+            const sessionTimer = document.getElementById('sessionTimer');
+            const sessionTimeLeftElement = document.getElementById('sessionTimeLeft');
+            
+            if (currentUser) {
+                sessionTimer.classList.add('show');
+                sessionTimeLeftElement.textContent = timeString;
+            } else {
+                sessionTimer.classList.remove('show');
+            }
+        }
+        
+        function resetSessionTimeout() {
+            if (currentUser) {
+                sessionTimeLeft = 300; // Reset to 5 minutes
+                debugLog('Session timeout reset');
+            }
+        }
+        
+        // Setup real-time synchronization
+        function setupRealTimeSync() {
+            // Clear any existing interval
+            if (syncInterval) {
+                clearInterval(syncInterval);
+            }
+            
+            // Sync every 30 seconds when online
+            syncInterval = setInterval(() => {
+                if (isOnline && currentUser) {
+                    performRealTimeSync();
+                }
+            }, 30000);
+            
+            // Also sync when page becomes visible again
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden && isOnline && currentUser) {
+                    performRealTimeSync();
+                }
+            });
+        }
+        
+        // Perform real-time sync for edit requests and critical data
+        function performRealTimeSync() {
+            if (!currentUser || !isOnline) return;
+            
+            debugLog('Performing real-time sync...');
+            showRealTimeIndicator();
+            
+            fetch(GOOGLE_SHEETS_URL + '?action=sync_requests&timestamp=' + Date.now())
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    const serverRequests = data.editRequests || [];
+                    const serverEntries = data.entries || [];
+                    
+                    // Check for new edit requests
+                    const localRequestIds = editRequests.map(r => r.id);
+                    const newRequests = serverRequests.filter(r => !localRequestIds.includes(r.id));
+                    
+                    if (newRequests.length > 0) {
+                        debugLog('Found ' + newRequests.length + ' new edit requests');
+                        // Add new requests to local storage
+                        newRequests.forEach(request => {
+                            editRequests.unshift(request);
+                        });
+                        updateUI();
+                        
+                        // Show notification for admin users
+                        if (currentUser.role === 'admin') {
+                            showSuccessMessage('New edit request received!');
+                        }
+                    }
+                    
+                    // Check for resolved requests
+                    const resolvedRequests = editRequests.filter(localReq => {
+                        const serverReq = serverRequests.find(r => r.id === localReq.id);
+                        return serverReq && serverReq.resolved && !localReq.resolved;
+                    });
+                    
+                    if (resolvedRequests.length > 0) {
+                        debugLog('Found ' + resolvedRequests.length + ' resolved requests');
+                        // Update local requests
+                        resolvedRequests.forEach(localReq => {
+                            const serverReq = serverRequests.find(r => r.id === localReq.id);
+                            if (serverReq) {
+                                localReq.resolved = serverReq.resolved;
+                                localReq.resolvedBy = serverReq.resolvedBy;
+                                localReq.resolvedAt = serverReq.resolvedAt;
+                                localReq.status = serverReq.status;
+                            }
+                        });
+                        updateUI();
+                        
+                        // Show notification for requesters
+                        resolvedRequests.forEach(req => {
+                            if (req.requestedBy === currentUser.id) {
+                                showSuccessMessage('Your edit request has been ' + (req.status || 'processed'));
+                            }
+                        });
+                    }
+                    
+                    // Check for updated entries (especially uncommitted ones)
+                    const updatedEntries = serverEntries.filter(serverEntry => {
+                        const localEntry = logbookEntries.find(e => e.id === serverEntry.id);
+                        return localEntry && localEntry.committed !== serverEntry.committed;
+                    });
+                    
+                    if (updatedEntries.length > 0) {
+                        debugLog('Found ' + updatedEntries.length + ' updated entries');
+                        updatedEntries.forEach(serverEntry => {
+                            const localEntry = logbookEntries.find(e => e.id === serverEntry.id);
+                            if (localEntry) {
+                                localEntry.committed = serverEntry.committed;
+                                if (serverEntry.committed) {
+                                    localEntry.committedBy = serverEntry.committedBy;
+                                    localEntry.committedAt = serverEntry.committedAt;
+                                } else {
+                                    delete localEntry.committedBy;
+                                    delete localEntry.committedAt;
+                                }
+                            }
+                        });
+                        updateUI();
+                    }
+                    
+                    hideRealTimeIndicator();
+                    saveToLocalStorage();
+                } else {
+                    debugLog('Real-time sync failed: ' + data.error);
+                    hideRealTimeIndicator();
+                }
+            })
+            .catch(error => {
+                debugLog('Real-time sync error: ' + error.message);
+                hideRealTimeIndicator();
+            });
+        }
+        
+        // Event Listeners
+        function setupEventListeners() {
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            document.getElementById('entryPhoto').addEventListener('change', handlePhotoPreview);
+        }
+        
+        // Login Management
+        function checkLoginStatus() {
+            const savedUser = localStorage.getItem('vmCourierUser');
+            
+            if (savedUser) {
+                const userData = JSON.parse(savedUser);
+                const user = users.find(u => u.id === userData.id);
+                if (user) {
+                    loginUser(user);
+                    return;
+                }
+            }
+            
+            showLoginPage();
+        }
+        
+        function handleLogin(e) {
+            e.preventDefault();
+            const id = document.getElementById('loginId').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            debugLog('Login attempt with ID: ' + id);
+            
+            const user = users.find(u => u.id === id && u.password === password);
+            
+            if (user) {
+                // Always save user to localStorage
+                localStorage.setItem('vmCourierUser', JSON.stringify({id: user.id}));
+                loginUser(user);
+            } else {
+                showLoginError('Invalid ID or password');
+            }
+        }
+        
+        function loginUser(user) {
+            currentUser = user;
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('mainApp').style.display = 'block';
+            
+            // Reset session timeout
+            resetSessionTimeout();
+            
+            // Update UI
+            document.getElementById('currentUserName').textContent = user.name;
+            document.getElementById('userAvatar').textContent = user.name.charAt(0);
+            
+            // Show admin features
+            if (user.role === 'admin') {
+                document.getElementById('viewDeletedBtn').style.display = 'inline-block';
+                document.getElementById('activityLogSection').style.display = 'block';
+                document.getElementById('adminApprovalsLink').style.display = 'block';
+            }
+            
+            // Set up real-time sync
+            setupRealTimeSync();
+            
+            // Load data from Google Sheets
+            loadDataFromGoogleSheets();
+            
+            logActivity('Login', `${user.name} logged in`);
+            debugLog('User logged in: ' + user.name);
+        }
+        
+        function logout() {
+            if (currentUser) {
+                logActivity('Logout', `${currentUser.name} logged out`);
+                debugLog('User logged out: ' + currentUser.name);
+            }
+            
+            // Clear sync interval
+            if (syncInterval) {
+                clearInterval(syncInterval);
+                syncInterval = null;
+            }
+            
+            currentUser = null;
+            localStorage.removeItem('vmCourierUser');
+            showLoginPage();
+        }
+        
+        function showLoginPage() {
+            document.getElementById('loginPage').style.display = 'flex';
+            document.getElementById('mainApp').style.display = 'none';
+            document.getElementById('loginForm').reset();
+            document.getElementById('loginError').style.display = 'none';
+        }
+        
+        function showLoginError(message) {
+            const errorDiv = document.getElementById('loginError');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+        
+        // Page Navigation with Animation
+        function showPage(page) {
+            // Hide all pages with animation
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Show selected page with animation
+            setTimeout(() => {
+                document.getElementById(page + 'Page').classList.add('active');
+            }, 100);
+            
+            // Set active nav link
+            if (page === 'adminApprovals') {
+                document.getElementById('adminApprovalsLink').classList.add('active');
+            }
+            
+            // Load page content
+            if (page === 'logbook') {
+                loadLogbookPage();
+            } else if (page === 'users') {
+                loadUsersPage();
+            } else if (page === 'adminApprovals') {
+                loadAdminApprovalsPage();
+            }
+            
+            // Perform real-time sync when switching pages
+            if (isOnline && currentUser) {
+                setTimeout(() => performRealTimeSync(), 500);
+            }
+        }
+        
+        // Logbook Management
+        function loadLogbookPage() {
+            updateStats();
+            renderLogbookEntries();
+            updateEditRequestBadge();
+        }
+        
+        function updateStats() {
+            const total = logbookEntries.length;
+            const committed = logbookEntries.filter(e => e.committed).length;
+            const myEntries = logbookEntries.filter(e => e.createdBy === currentUser.id).length;
+            const requests = editRequests.filter(r => !r.resolved).length;
+            
+            document.getElementById('totalEntries').textContent = total;
+            document.getElementById('committedEntries').textContent = committed;
+            document.getElementById('myEntries').textContent = myEntries;
+            document.getElementById('pendingRequests').textContent = requests;
+        }
+        
+        function renderLogbookEntries() {
+            const tbody = document.getElementById('entriesTableBody');
+            tbody.innerHTML = '';
+            
+            const entriesToShow = showingDeleted ? deletedEntries : logbookEntries;
+            let filteredEntries = entriesToShow;
+            
+            document.getElementById('entriesTitle').textContent = showingDeleted ? 
+                'Deleted Entries' : 'All Entries';
+            
+            filteredEntries.forEach(entry => {
+                const row = document.createElement('tr');
+                if (entry.committed) {
+                    row.classList.add('committed-entry');
+                }
+                
+                const hasEditRequest = editRequests.some(r => r.entryId === entry.id && !r.resolved);
+                const editRequestBadge = hasEditRequest ? 
+                    '<span class="edit-request-badge ms-2">Edit Requested</span>' : '';
+                
+                let statusBadge = '';
+                if (entry.status) {
+                    let statusClass = '';
+                    switch(entry.status) {
+                        case 'Pending':
+                            statusClass = 'status-pending';
+                            break;
+                        case 'In transit':
+                            statusClass = 'status-in-transit';
+                            break;
+                        case 'Delivered':
+                            statusClass = 'status-delivered';
+                            break;
+                        case 'Return':
+                            statusClass = 'status-return';
+                            break;
+                    }
+                    statusBadge = `<span class="status-badge ${statusClass}">${entry.status}</span>`;
+                }
+                
+                row.innerHTML = `
+                    <td><span class="entry-id">${entry.id}</span></td>
+                    <td>${formatMalaysiaDate(entry.date)}</td>
+                    <td>${entry.pic}${editRequestBadge}</td>
+                    <td><span class="badge bg-primary">${entry.destination}</span></td>
+                    <td><span class="text-muted">${entry.cashbill || 'N/A'}</span></td>
+                    <td><span class="text-muted">${entry.consignment || 'N/A'}</span></td>
+                    <td>${entry.courierType || 'N/A'}</td>
+                    <td>${statusBadge || '<span class="text-muted">Not set</span>'}</td>
+                    <td>
+                        ${entry.photo ? 
+                            `<img src="${entry.photo}" class="entry-photo" onclick="viewPhoto('${entry.photo}')">` : 
+                            '<span class="text-muted">No photo</span>'
+                        }
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-info" onclick="viewRemarks('${entry.id}')">
+                            <i class="fas fa-comment"></i> 
+                            ${entryRemarks[entry.id] ? entryRemarks[entry.id].length : 0}
+                        </button>
+                    </td>
+                    <td>
+                        ${entry.committed ? 
+                            '<span class="badge bg-success"><i class="fas fa-lock"></i> Committed</span>' : 
+                            '<span class="badge bg-warning text-dark"><i class="fas fa-unlock"></i> Draft</span>'
+                        }
+                    </td>
+                    <td>${renderActionButtons(entry)}</td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+        }
+        
+        function renderActionButtons(entry) {
+            debugLog('Rendering action buttons for entry:', entry);
+            debugLog('Current user:', currentUser);
+            debugLog('Entry committed:', entry.committed);
+            debugLog('Entry PIC:', entry.pic);
+            debugLog('Current user name:', currentUser.name);
+            
+            if (showingDeleted) {
+                return currentUser.role === 'admin' ? `
+                    <button class="btn btn-sm btn-success me-1" onclick="restoreEntry('${entry.id}')">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                    <button class="btn btn-sm btn-danger" onclick="permanentlyDeleteEntry('${entry.id}')">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                ` : '';
+            }
+            
+            let buttons = '';
+            const isCreator = entry.createdBy === currentUser.id;
+            const isPIC = entry.pic === currentUser.name;
+            
+            // Edit button logic
+            if (entry.committed) {
+                // Committed entries - only admin can edit
+                if (currentUser.role === 'admin') {
+                    debugLog('Showing edit button for admin on committed entry');
+                    buttons += `<button class="btn btn-sm btn-primary me-1" onclick="editEntry('${entry.id}')">
+                        <i class="fas fa-edit"></i>
+                    </button>`;
+                } else {
+                    debugLog('Showing admin contact button for non-admin on committed entry');
+                    buttons += `<button class="btn btn-sm admin-contact-btn me-1" onclick="showAdminContact()">
+                        <i class="fas fa-edit"></i> Edit
+                    </button>`;
+                }
+            } else {
+                // Uncommitted entries - creator, PIC, or admin can edit
+                if (currentUser.role === 'admin' || isCreator || isPIC) {
+                    debugLog('Showing edit button for uncommitted entry - user has permission');
+                    buttons += `<button class="btn btn-sm btn-primary me-1" onclick="editEntry('${entry.id}')">
+                        <i class="fas fa-edit"></i>
+                    </button>`;
+                } else {
+                    debugLog('Not showing edit button for uncommitted entry - user does not have permission');
+                }
+            }
+            
+            // Delete button
+            if (currentUser.role === 'admin' || 
+                (isCreator && !entry.committed)) {
+                buttons += `<button class="btn btn-sm btn-danger me-1" onclick="deleteEntry('${entry.id}')">
+                    <i class="fas fa-trash"></i>
+                </button>`;
+            }
+            
+            // Commit/Uncommit button - UPDATED LOGIC
+            if (!entry.committed) {
+                // Allow commit if:
+                // 1. User is the creator of the entry, OR
+                // 2. User is admin, OR
+                // 3. User has canCommit permission AND is NOT the creator
+                if (isCreator || currentUser.role === 'admin' || 
+                    (currentUser.canCommit && !isCreator)) {
+                    buttons += `<button class="btn btn-sm btn-success" onclick="commitEntry('${entry.id}')">
+                        <i class="fas fa-lock"></i> Commit
+                    </button>`;
+                }
+            } else if (currentUser.role === 'admin') {
+                // Only admin can uncommit
+                buttons += `<button class="btn btn-sm btn-secondary" onclick="uncommitEntry('${entry.id}')">
+                    <i class="fas fa-unlock"></i>
+                </button>`;
+            }
+            
+            debugLog('Buttons HTML:', buttons);
+            return buttons;
+        }
+        
+        // Generate LBVM sequential ID starting from LBVM001
+        function generateNextId() {
+            try {
+                debugLog('Generating next ID...');
+                
+                const allEntries = [...logbookEntries, ...deletedEntries];
+                debugLog('Total entries found: ' + allEntries.length);
+                
+                const lbvmEntries = allEntries.filter(entry => entry.id && entry.id.startsWith('LBVM'));
+                debugLog('LBVM entries found: ' + lbvmEntries.length);
+                
+                if (lbvmEntries.length === 0) {
+                    debugLog('No LBVM entries found, starting with LBVM001');
+                    return "LBVM001";
+                }
+                
+                let maxNum = 0;
+                lbvmEntries.forEach(entry => {
+                    const numStr = entry.id.substring(4);
+                    const num = parseInt(numStr, 10);
+                    if (!isNaN(num) && num > maxNum) {
+                        maxNum = num;
+                    }
+                });
+                
+                debugLog('Max number found: ' + maxNum);
+                
+                const nextNum = maxNum + 1;
+                const nextNumStr = String(nextNum).padStart(3, '0');
+                const newId = `LBVM${nextNumStr}`;
+                
+                debugLog('Generated new ID: ' + newId);
+                return newId;
+            } catch (error) {
+                debugLog('Error generating ID: ' + error.message);
+                return "LBVM" + Date.now();
+            }
+        }
+        
+        // Entry Management
+        function openAddEntryModal() {
+            currentEntryId = null;
+            document.getElementById('entryModalTitle').textContent = 'Add New Entry';
+            document.getElementById('entryForm').reset();
+            
+            const malaysiaDate = getMalaysiaTime();
+            document.getElementById('entryDate').value = malaysiaDate.toISOString().split('T')[0];
+            
+            document.getElementById('entryPIC').value = currentUser.name;
+            document.getElementById('entryCashbill').value = '';
+            document.getElementById('entryConsignment').value = '';
+            document.getElementById('entryCourierType').value = '';
+            document.getElementById('entryStatus').value = '';
+            document.getElementById('photoPreview').innerHTML = '';
+            document.getElementById('saveButtonText').textContent = 'Save Entry';
+            debugLog('Opened add entry modal');
+        }
+        
+        function saveEntry() {
+            debugLog('Save entry called');
+            
+            const date = document.getElementById('entryDate').value;
+            const destination = document.getElementById('entryDestination').value;
+            const cashbill = document.getElementById('entryCashbill').value;
+            const consignment = document.getElementById('entryConsignment').value;
+            const courierType = document.getElementById('entryCourierType').value;
+            const status = document.getElementById('entryStatus').value;
+            const photoFile = document.getElementById('entryPhoto').files[0];
+            const remarks = document.getElementById('entryRemarks').value;
+            
+            debugLog('Form data:', { date, destination, cashbill, consignment, courierType, status, remarks, hasPhoto: !!photoFile });
+            
+            if (!date || !destination || !cashbill || !consignment || !courierType || !status) {
+                debugLog('Validation failed - missing required fields');
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            let photoData = null;
+            if (photoFile) {
+                debugLog('Processing photo file...');
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    photoData = e.target.result;
+                    debugLog('Photo loaded, size: ' + photoData.length);
+                    saveEntryWithPhoto(date, destination, cashbill, consignment, courierType, status, remarks, photoData);
+                };
+                reader.readAsDataURL(photoFile);
+            } else {
+                debugLog('No photo file, proceeding without photo');
+                saveEntryWithPhoto(date, destination, cashbill, consignment, courierType, status, remarks, null);
+            }
+        }
+        
+        function saveEntryWithPhoto(date, destination, cashbill, consignment, courierType, status, remarks, photoData) {
+            try {
+                debugLog('Saving entry with photo:', { date, destination, cashbill, consignment, courierType, status, hasPhoto: !!photoData });
+                
+                if (currentEntryId) {
+                    // Edit existing entry
+                    debugLog('Editing existing entry: ' + currentEntryId);
+                    const entry = logbookEntries.find(e => e.id === currentEntryId);
+                    if (entry) {
+                        entry.date = date;
+                        entry.destination = destination;
+                        entry.cashbill = cashbill;
+                        entry.consignment = consignment;
+                        entry.courierType = courierType;
+                        entry.status = status;
+                        if (photoData) entry.photo = photoData;
+                        entry.lastModified = getMalaysiaTime().toISOString();
+                        
+                        if (remarks) {
+                            if (!entryRemarks[currentEntryId]) entryRemarks[currentEntryId] = [];
+                            entryRemarks[currentEntryId].push({
+                                text: remarks,
+                                author: currentUser.name,
+                                timestamp: getMalaysiaTime().toISOString()
+                            });
+                        }
+                        
+                        logActivity('Edit Entry', `Entry #${currentEntryId} edited by ${currentUser.name}`);
+                        
+                        if (isOnline) {
+                            updateGoogleSheet(entry);
+                        } else {
+                            showErrorMessage('You are offline. Changes will be saved locally and synced when you reconnect.');
+                        }
+                    } else {
+                        debugLog('Error: Entry not found for editing: ' + currentEntryId);
+                        alert('Error: Entry not found');
+                        return;
+                    }
+                } else {
+                    // Add new entry with LBVM sequential ID
+                    debugLog('Creating new entry...');
+                    const newId = generateNextId();
+                    debugLog('Generated new ID: ' + newId);
+                    
+                    const malaysiaTime = getMalaysiaTime();
+                    
+                    const newEntry = {
+                        id: newId,
+                        date: date,
+                        pic: currentUser.name,
+                        destination: destination,
+                        cashbill: cashbill,
+                        consignment: consignment,
+                        courierType: courierType,
+                        status: status,
+                        photo: photoData,
+                        committed: false,
+                        createdBy: currentUser.id,
+                        createdAt: malaysiaTime.toISOString(),
+                        lastModified: malaysiaTime.toISOString()
+                    };
+                    
+                    debugLog('Created new entry:', newEntry);
+                    
+                    logbookEntries.unshift(newEntry);
+                    debugLog('Added entry to logbookEntries. Total entries: ' + logbookEntries.length);
+                    
+                    if (remarks) {
+                        entryRemarks[newEntry.id] = [{
+                            text: remarks,
+                            author: currentUser.name,
+                            timestamp: malaysiaTime.toISOString()
+                        }];
+                    }
+                    
+                    logActivity('Add Entry', `New entry created by ${currentUser.name}`);
+                    
+                    if (isOnline) {
+                        debugLog('Submitting to Google Sheets...');
+                        submitToGoogleSheet(newEntry);
+                        showSuccessMessage('Entry created successfully and submitted to Google Sheets!');
+                    } else {
+                        debugLog('Offline mode - saving locally only');
+                        showErrorMessage('You are offline. Entry saved locally and will be synced when you reconnect.');
+                    }
+                }
+                
+                debugLog('Saving to localStorage...');
+                saveToLocalStorage();
+                debugLog('Updating UI...');
+                updateUI();
+                debugLog('Closing modal...');
+                bootstrap.Modal.getInstance(document.getElementById('entryModal')).hide();
+                debugLog('Entry saved successfully');
+            } catch (error) {
+                debugLog('Error saving entry: ' + error.message);
+                console.error('Error saving entry:', error);
+                alert('Error saving entry: ' + error.message);
+            }
+        }
+        
+        function editEntry(entryId) {
+            const entry = logbookEntries.find(e => e.id === entryId);
+            if (!entry) return;
+            
+            currentEntryId = entryId;
+            document.getElementById('entryModalTitle').textContent = 'Edit Entry';
+            document.getElementById('entryDate').value = entry.date;
+            document.getElementById('entryPIC').value = entry.pic;
+            document.getElementById('entryDestination').value = entry.destination;
+            document.getElementById('entryCashbill').value = entry.cashbill || '';
+            document.getElementById('entryConsignment').value = entry.consignment || '';
+            document.getElementById('entryCourierType').value = entry.courierType || '';
+            document.getElementById('entryStatus').value = entry.status || '';
+            document.getElementById('entryRemarks').value = '';
+            document.getElementById('saveButtonText').textContent = 'Update Entry';
+            
+            if (entry.photo) {
+                document.getElementById('photoPreview').innerHTML = `
+                    <img src="${entry.photo}" class="photo-preview">
+                `;
+            }
+            
+            new bootstrap.Modal(document.getElementById('entryModal')).show();
+        }
+        
+        function deleteEntry(entryId) {
+            if (!confirm('Are you sure you want to delete this entry?')) return;
+            
+            const entryIndex = logbookEntries.findIndex(e => e.id === entryId);
+            if (entryIndex !== -1) {
+                const entry = logbookEntries.splice(entryIndex, 1)[0];
+                deletedEntries.unshift(entry);
+                logActivity('Delete Entry', `Entry #${entryId} deleted by ${currentUser.name}`);
+                
+                if (isOnline) {
+                    deleteFromGoogleSheet(entry);
+                } else {
+                    showErrorMessage('You are offline. Changes will be saved locally and synced when you reconnect.');
+                }
+                
+                saveToLocalStorage();
+                updateUI();
+            }
+        }
+        
+        function commitEntry(entryId) {
+            const entry = logbookEntries.find(e => e.id === entryId);
+            if (!entry) return;
+            
+            // Allow commit if:
+            // 1. User is the creator of the entry, OR
+            // 2. User is admin, OR
+            // 3. User has canCommit permission AND is NOT the creator
+            const isCreator = entry.createdBy === currentUser.id;
+            
+            if (!isCreator && currentUser.role !== 'admin' && !currentUser.canCommit) {
+                showErrorMessage('You do not have permission to commit this entry.');
+                return;
+            }
+            
+            // Validate required fields before committing
+            if (!entry.date || !entry.destination || !entry.cashbill || !entry.consignment || !entry.courierType || !entry.status) {
+                showErrorMessage('Please fill in all required fields before committing.');
+                return;
+            }
+            
+            entry.committed = true;
+            entry.committedBy = currentUser.id;
+            entry.committedAt = getMalaysiaTime().toISOString();
+            
+            // Remove uncommit tracking if exists
+            delete entry.uncommittedBy;
+            delete entry.uncommittedAt;
+            
+            // Add system remark if this is a re-commit after uncommit
+            if (entry.lastCommittedBy) {
+                if (!entryRemarks[entryId]) {
+                    entryRemarks[entryId] = [];
+                }
+                entryRemarks[entryId].push({
+                    text: `Entry re-committed by ${currentUser.name}.`,
+                    author: 'System',
+                    timestamp: getMalaysiaTime().toISOString(),
+                    isSystem: true
+                });
+            }
+            
+            entry.lastCommittedBy = currentUser.id;
+            entry.lastCommittedAt = getMalaysiaTime().toISOString();
+            
+            logActivity('Commit Entry', `Entry #${entryId} committed by ${currentUser.name}`);
+            
+            if (isOnline) {
+                updateGoogleSheet(entry);
+            } else {
+                showErrorMessage('You are offline. Changes will be saved locally and synced when you reconnect.');
+            }
+            
+            saveToLocalStorage();
+            updateUI();
+            
+            if (entry.lastCommittedBy && entry.lastCommittedBy !== currentUser.id) {
+                showSuccessMessage('Entry re-committed successfully!');
+            } else {
+                showSuccessMessage('Entry committed successfully!');
+            }
+        }
+        
+        function uncommitEntry(entryId) {
+            // Only admin can uncommit entries
+            if (currentUser.role !== 'admin') {
+                showErrorMessage('Only administrators can uncommit entries. Please contact Danial Danish (ID: 7434).');
+                return;
+            }
+            
+            const entry = logbookEntries.find(e => e.id === entryId);
+            if (entry) {
+                entry.committed = false;
+                entry.uncommittedBy = currentUser.id;
+                entry.uncommittedAt = getMalaysiaTime().toISOString();
+                delete entry.committedBy;
+                delete entry.committedAt;
+                
+                // Notify the creator that their entry has been uncommitted
+                const creator = users.find(u => u.id === entry.createdBy);
+                if (creator && creator.id !== currentUser.id) {
+                    // Add a system remark to notify the creator
+                    if (!entryRemarks[entryId]) {
+                        entryRemarks[entryId] = [];
+                    }
+                    entryRemarks[entryId].push({
+                        text: `Admin has uncommitted this entry. You can now edit and re-commit it.`,
+                        author: 'System',
+                        timestamp: getMalaysiaTime().toISOString(),
+                        isSystem: true
+                    });
+                }
+                
+                // Resolve any edit requests for this entry
+                editRequests.forEach(req => {
+                    if (req.entryId === entryId) {
+                        req.resolved = true;
+                        req.resolvedBy = currentUser.id;
+                        req.resolvedAt = getMalaysiaTime().toISOString();
+                    }
+                });
+                
+                logActivity('Uncommit Entry', `Entry #${entryId} uncommitted by admin ${currentUser.name}`);
+                
+                // Force immediate sync to ensure all devices see the change
+                if (isOnline) {
+                    updateGoogleSheet(entry);
+                    // Force a refresh of data from Google Sheets
+                    setTimeout(() => {
+                        loadDataFromGoogleSheets();
+                    }, 1000);
+                } else {
+                    showErrorMessage('You are offline. Changes will be saved locally and synced when you reconnect.');
+                }
+                
+                saveToLocalStorage();
+                updateUI();
+                showSuccessMessage('Entry uncommitted successfully! The creator can now edit and re-commit this entry.');
+            }
+        }
+        
+        function adminCommitEntry(entryId) {
+            const entry = logbookEntries.find(e => e.id === entryId);
+            if (entry) {
+                entry.committed = true;
+                entry.committedBy = currentUser.id;
+                entry.committedAt = getMalaysiaTime().toISOString();
+                entry.lastCommittedBy = currentUser.id;
+                entry.lastCommittedAt = getMalaysiaTime().toISOString();
+                
+                // Remove uncommit tracking
+                delete entry.uncommittedBy;
+                delete entry.uncommittedAt;
+                
+                logActivity('Admin Commit', `Entry #${entryId} re-committed by admin ${currentUser.name}`);
+                
+                if (isOnline) {
+                    updateGoogleSheet(entry);
+                } else {
+                    showErrorMessage('You are offline. Changes will be saved locally and synced when you reconnect.');
+                }
+                
+                saveToLocalStorage();
+                updateUI();
+                showSuccessMessage('Entry re-committed successfully by admin!');
+            }
+        }
+        
+        function restoreEntry(entryId) {
+            const entryIndex = deletedEntries.findIndex(e => e.id === entryId);
+            if (entryIndex !== -1) {
+                const entry = deletedEntries.splice(entryIndex, 1)[0];
+                logbookEntries.unshift(entry);
+                logActivity('Restore Entry', `Entry #${entryId} restored by ${currentUser.name}`);
+                
+                if (isOnline) {
+                    updateGoogleSheet(entry);
+                } else {
+                    showErrorMessage('You are offline. Changes will be saved locally and synced when you reconnect.');
+                }
+                
+                saveToLocalStorage();
+                updateUI();
+            }
+        }
+        
+        function permanentlyDeleteEntry(entryId) {
+            if (!confirm('Are you sure you want to permanently delete this entry? This cannot be undone.')) return;
+            
+            const entryIndex = deletedEntries.findIndex(e => e.id === entryId);
+            if (entryIndex !== -1) {
+                const entry = deletedEntries.splice(entryIndex, 1)[0];
+                delete entryRemarks[entryId];
+                logActivity('Permanent Delete', `Entry #${entryId} permanently deleted by ${currentUser.name}`);
+                
+                if (isOnline) {
+                    deleteFromGoogleSheet(entry);
+                } else {
+                    showErrorMessage('You are offline. Changes will be saved locally and synced when you reconnect.');
+                }
+                
+                saveToLocalStorage();
+                updateUI();
+            }
+        }
+        
+        function toggleDeletedEntries() {
+            showingDeleted = !showingDeleted;
+            const btn = document.getElementById('viewDeletedBtn');
+            btn.innerHTML = showingDeleted ? 
+                '<i class="fas fa-list me-2"></i>View Active Entries' : 
+                '<i class="fas fa-trash me-2"></i>View Deleted Entries';
+            renderLogbookEntries();
+        }
+        
+        // Admin Contact Modal
+        function showAdminContact() {
+            new bootstrap.Modal(document.getElementById('adminContactModal')).show();
+        }
+        
+        // Remarks Management
+        function viewRemarks(entryId) {
+            currentRemarksEntryId = entryId;
+            const remarks = entryRemarks[entryId] || [];
+            const remarksList = document.getElementById('remarksList');
+            
+            remarksList.innerHTML = '';
+            if (remarks.length === 0) {
+                remarksList.innerHTML = '<p class="text-muted">No remarks yet.</p>';
+            } else {
+                remarks.forEach(remark => {
+                    const remarkDiv = document.createElement('div');
+                    remarkDiv.className = 'remark-item';
+                    if (remark.isSystem) {
+                        remarkDiv.classList.add('system-remark');
+                        remarkDiv.innerHTML = `
+                            <div class="remark-author">
+                                <i class="fas fa-info-circle me-1"></i>${remark.author}
+                            </div>
+                            <div>${remark.text}</div>
+                            <div class="remark-time">${formatMalaysiaDateTime(remark.timestamp)}</div>
+                        `;
+                    } else {
+                        remarkDiv.innerHTML = `
+                            <div class="remark-author">${remark.author}</div>
+                            <div>${remark.text}</div>
+                            <div class="remark-time">${formatMalaysiaDateTime(remark.timestamp)}</div>
+                        `;
+                    }
+                    remarksList.appendChild(remarkDiv);
+                });
+            }
+            
+            document.getElementById('newRemark').value = '';
+            new bootstrap.Modal(document.getElementById('remarksModal')).show();
+        }
+        
+        function addRemark() {
+            const remarkText = document.getElementById('newRemark').value.trim();
+            if (!remarkText) return;
+            
+            if (!entryRemarks[currentRemarksEntryId]) {
+                entryRemarks[currentRemarksEntryId] = [];
+            }
+            
+            entryRemarks[currentRemarksEntryId].push({
+                text: remarkText,
+                author: currentUser.name,
+                timestamp: getMalaysiaTime().toISOString()
+            });
+            
+            logActivity('Add Remark', `Remark added to entry #${currentRemarksEntryId} by ${currentUser.name}`);
+            saveToLocalStorage();
+            viewRemarks(currentRemarksEntryId);
+            renderLogbookEntries();
+        }
+        
+        // Edit Request Management with Enhanced Sync
+        function requestEdit(entryId) {
+            debugLog('Requesting edit for entry:', entryId);
+            currentEntryId = entryId;
+            document.getElementById('editRequestReason').value = '';
+            
+            // Ensure the modal is properly initialized
+            const modalElement = document.getElementById('editRequestModal');
+            const modal = new bootstrap.Modal(modalElement);
+            modal.show();
+        }
+        
+        function submitEditRequest() {
+            const reason = document.getElementById('editRequestReason').value.trim();
+            if (!reason) {
+                alert('Please provide a reason for the edit request');
+                return;
+            }
+            
+            const request = {
+                id: Date.now(),
+                entryId: currentEntryId,
+                requestedBy: currentUser.id,
+                requestedByName: currentUser.name,
+                reason: reason,
+                timestamp: getMalaysiaTime().toISOString(),
+                resolved: false
+            };
+            
+            editRequests.unshift(request);
+            logActivity('Edit Request', `Edit request submitted for entry #${currentEntryId} by ${currentUser.name}`);
+            
+            // Save locally first
+            saveToLocalStorage();
+            updateUI();
+            
+            // Sync with Google Sheets immediately
+            if (isOnline) {
+                syncEditRequestToGoogleSheets(request)
+                    .then(() => {
+                        showSuccessMessage('Edit request submitted and synced successfully!');
+                    })
+                    .catch(error => {
+                        debugLog('Failed to sync edit request: ' + error.message);
+                        showErrorMessage('Edit request submitted locally. Will sync when online.');
+                    });
+            } else {
+                showSuccessMessage('Edit request submitted. Will sync when online.');
+            }
+            
+            bootstrap.Modal.getInstance(document.getElementById('editRequestModal')).hide();
+        }
+        
+        // Sync edit request to Google Sheets
+        async function syncEditRequestToGoogleSheets(request) {
+            const formData = new FormData();
+            formData.append('action', 'sync_edit_request');
+            formData.append('requestId', request.id);
+            formData.append('entryId', request.entryId);
+            formData.append('requestedBy', request.requestedBy);
+            formData.append('requestedByName', request.requestedByName);
+            formData.append('reason', request.reason);
+            formData.append('timestamp', request.timestamp);
+            formData.append('resolved', request.resolved);
+            
+            const response = await fetch(GOOGLE_SHEETS_URL, {
+                method: 'POST',
+                body: formData
+            });
+            
+            const data = await response.json();
+            if (data.result !== 'success') {
+                throw new Error(data.error || 'Failed to sync edit request');
+            }
+            
+            return data;
+        }
+        
+        function updateEditRequestBadge() {
+            const pendingRequests = editRequests.filter(r => !r.resolved).length;
+            const badge = document.getElementById('editRequestBadge');
+            
+            if (currentUser.role === 'admin' && pendingRequests > 0) {
+                badge.textContent = pendingRequests;
+                badge.style.display = 'flex';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+        
+        // User Management
+        function loadUsersPage() {
+            const usersList = document.getElementById('usersList');
+            const usersTitle = document.getElementById('usersTitle');
+            
+            if (currentUser.role === 'admin') {
+                usersTitle.textContent = 'All Users';
+                usersList.innerHTML = '';
+                
+                users.forEach(user => {
+                    const userCard = document.createElement('div');
+                    userCard.className = 'card mb-3';
+                    userCard.innerHTML = `
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-2">
+                                    <div class="user-avatar mx-auto">${user.name.charAt(0)}</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="mb-1">${user.name}</h6>
+                                    <p class="mb-1">ID: ${user.id}</p>
+                                    <span class="badge ${user.role === 'admin' ? 'bg-primary' : 'bg-secondary'}">${user.role}</span>
+                                </div>
+                                <div class="col-md-4 text-end">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="commit${user.id}" 
+                                               ${user.canCommit ? 'checked' : ''} 
+                                               onchange="toggleCommitPermission('${user.id}')"
+                                               ${user.role === 'admin' ? 'disabled' : ''}>
+                                        <label class="form-check-label" for="commit${user.id}">
+                                            Can Commit Others' Entries
+                                            <div class="permission-info">Everyone can commit their own entries</div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    usersList.appendChild(userCard);
+                });
+                
+                loadActivityLog();
+            } else {
+                usersTitle.textContent = 'My Profile';
+                usersList.innerHTML = `
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-3">
+                                    <div class="user-avatar mx-auto" style="width: 80px; height: 80px; font-size: 2rem;">
+                                        ${currentUser.name.charAt(0)}
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <h4>${currentUser.name}</h4>
+                                    <p class="mb-1"><strong>ID:</strong> ${currentUser.id}</p>
+                                    <p class="mb-1"><strong>Role:</strong> 
+                                        <span class="badge ${currentUser.role === 'admin' ? 'bg-primary' : 'bg-secondary'}">${currentUser.role}</span>
+                                    </p>
+                                    <p class="mb-1"><strong>Outlet:</strong> VM:Switch VillageMall</p>
+                                    <p class="mb-0"><strong>Can Commit Others' Entries:</strong> 
+                                        <span class="badge ${currentUser.canCommit ? 'bg-success' : 'bg-danger'}">
+                                            ${currentUser.canCommit ? 'Yes' : 'No'}
+                                        </span>
+                                        <div class="permission-info d-inline-block ms-2">
+                                            <i class="fas fa-info-circle me-1"></i>
+                                            You can always commit your own entries
+                                        </div>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        
+        function toggleCommitPermission(userId) {
+            const user = users.find(u => u.id === userId);
+            if (user && user.role !== 'admin') {
+                user.canCommit = !user.canCommit;
+                logActivity('Toggle Permission', `Commit permission ${user.canCommit ? 'granted to' : 'revoked from'} ${user.name}`);
+                saveToLocalStorage();
+            }
+        }
+        
+        function loadActivityLog() {
+            const activityLog = document.getElementById('activityLog');
+            activityLog.innerHTML = '';
+            
+            // Show edit requests first
+            const pendingRequests = editRequests.filter(r => !r.resolved);
+            if (pendingRequests.length > 0) {
+                const requestsHeader = document.createElement('h6');
+                requestsHeader.className = 'text-warning mb-3';
+                requestsHeader.innerHTML = '<i class="fas fa-exclamation-triangle me-2"></i>Pending Edit Requests';
+                activityLog.appendChild(requestsHeader);
+                
+                pendingRequests.forEach(request => {
+                    const requestDiv = document.createElement('div');
+                    requestDiv.className = 'activity-item bg-warning bg-opacity-10 border border-warning';
+                    requestDiv.innerHTML = `
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <strong>${request.requestedByName}</strong> requests edit for Entry #${request.entryId}
+                                <br><small class="text-muted">${formatMalaysiaDateTime(request.timestamp)}</small>
+                                <br><em>"${request.reason}"</em>
+                            </div>
+                            <button class="btn btn-sm btn-success" onclick="approveEditRequest(${request.id})">
+                                Approve
+                            </button>
+                        </div>
+                    `;
+                    activityLog.appendChild(requestDiv);
+                });
+            }
+            
+            // Show entries awaiting admin re-commit approval
+            const uncommittedEntries = logbookEntries.filter(e => !e.committed && e.uncommittedBy);
+            if (uncommittedEntries.length > 0) {
+                const uncommittedHeader = document.createElement('h6');
+                uncommittedHeader.className = 'text-info mb-3';
+                uncommittedHeader.innerHTML = '<i class="fas fa-clock me-2"></i>Entries Awaiting Re-commit Approval';
+                activityLog.appendChild(uncommittedHeader);
+                
+                uncommittedEntries.forEach(entry => {
+                    const entryDiv = document.createElement('div');
+                    entryDiv.className = 'activity-item bg-info bg-opacity-10 border border-info';
+                    entryDiv.innerHTML = `
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <strong>Entry #${entry.id}</strong> is uncommitted and awaiting re-commit
+                                <br><small class="text-muted">Created by: ${entry.pic}</small>
+                                <br><small class="text-muted">Uncommitted by: ${users.find(u => u.id === entry.uncommittedBy)?.name || 'Unknown'}</small>
+                                <br><small class="text-muted">Uncommitted at: ${formatMalaysiaDateTime(entry.uncommittedAt)}</small>
+                            </div>
+                            <div>
+                                <button class="btn btn-sm btn-success me-1" onclick="adminCommitEntry('${entry.id}')">
+                                    <i class="fas fa-check"></i> Approve Commit
+                                </button>
+                                <button class="btn btn-sm btn-primary" onclick="viewEntryDetails('${entry.id}')">
+                                    <i class="fas fa-eye"></i> View
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    activityLog.appendChild(entryDiv);
+                });
+            }
+            
+            // Show recent activity
+            const recentLogs = activityLogs.slice(0, 10);
+            if (recentLogs.length > 0) {
+                const logsHeader = document.createElement('h6');
+                logsHeader.className = 'text-primary mb-3 mt-4';
+                logsHeader.innerHTML = '<i class="fas fa-history me-2"></i>Recent Activity';
+                activityLog.appendChild(logsHeader);
+                
+                recentLogs.forEach(log => {
+                    const logDiv = document.createElement('div');
+                    logDiv.className = 'activity-item';
+                    logDiv.innerHTML = `
+                        <strong>${log.action}</strong>
+                        <br><small class="text-muted">${log.details}</small>
+                        <br><small class="text-muted">${formatMalaysiaDateTime(log.timestamp)}</small>
+                    `;
+                    activityLog.appendChild(logDiv);
+                });
+            }
+        }
+        
+        function approveEditRequest(requestId) {
+            const request = editRequests.find(r => r.id === requestId);
+            if (request) {
+                // Update the request status
+                request.resolved = true;
+                request.resolvedBy = currentUser.id;
+                request.resolvedAt = getMalaysiaTime().toISOString();
+                request.status = 'approved';
+                
+                // Sync the approval to Google Sheets
+                if (isOnline) {
+                    syncEditRequestToGoogleSheets(request)
+                        .then(() => {
+                            uncommitEntry(request.entryId);
+                            showSuccessMessage(`Edit request approved and synced successfully!`);
+                        })
+                        .catch(error => {
+                            debugLog('Failed to sync approval: ' + error.message);
+                            uncommitEntry(request.entryId);
+                            showErrorMessage('Edit request approved. Sync will happen when online.');
+                        });
+                } else {
+                    uncommitEntry(request.entryId);
+                    showSuccessMessage('Edit request approved. Will sync when online.');
+                }
+            }
+        }
+        
+        function viewEntryDetails(entryId) {
+            const entry = logbookEntries.find(e => e.id === entryId);
+            if (!entry) return;
+            
+            const modalHtml = `
+            <div class="modal fade" id="entryDetailsModal" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Entry Details - #${entry.id}</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><strong>Date:</strong> ${formatMalaysiaDate(entry.date)}</p>
+                                    <p><strong>PIC:</strong> ${entry.pic}</p>
+                                    <p><strong>Destination:</strong> ${entry.destination}</p>
+                                    <p><strong>Cashbill:</strong> ${entry.cashbill || 'N/A'}</p>
+                                    <p><strong>Consignment:</strong> ${entry.consignment || 'N/A'}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Courier Type:</strong> ${entry.courierType || 'N/A'}</p>
+                                    <p><strong>Status:</strong> ${entry.status || 'Not set'}</p>
+                                    <p><strong>Created By:</strong> ${users.find(u => u.id === entry.createdBy)?.name || 'Unknown'}</p>
+                                    <p><strong>Created At:</strong> ${formatMalaysiaDateTime(entry.createdAt)}</p>
+                                    <p><strong>Last Modified:</strong> ${formatMalaysiaDateTime(entry.lastModified)}</p>
+                                </div>
+                            </div>
+                            ${entry.photo ? `
+                            <div class="mt-3">
+                                <p><strong>Photo Proof:</strong></p>
+                                <img src="${entry.photo}" class="img-fluid" style="max-height: 300px;">
+                            </div>
+                            ` : ''}
+                            ${entryRemarks[entry.id] ? `
+                            <div class="mt-3">
+                                <p><strong>Remarks:</strong></p>
+                                <div class="remarks-list">
+                                    ${entryRemarks[entry.id].map(remark => `
+                                        <div class="remark-item ${remark.isSystem ? 'system-remark' : ''}">
+                                            <div class="remark-author">
+                                                ${remark.isSystem ? '<i class="fas fa-info-circle me-1"></i>' : ''}${remark.author}
+                                            </div>
+                                            <div>${remark.text}</div>
+                                            <div class="remark-time">${formatMalaysiaDateTime(remark.timestamp)}</div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            ` : ''}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-success" onclick="adminCommitEntry('${entry.id}'); bootstrap.Modal.getInstance(document.getElementById('entryDetailsModal')).hide();">
+                                <i class="fas fa-check"></i> Approve Commit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+            
+            const existingModal = document.getElementById('entryDetailsModal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+            new bootstrap.Modal(document.getElementById('entryDetailsModal')).show();
+        }
+        
+        // Admin Approvals Management
+        function loadAdminApprovalsPage() {
+            // Load edit requests
+            const editRequestsList = document.getElementById('editRequestsList');
+            const pendingRequests = editRequests.filter(r => !r.resolved);
+            
+            document.getElementById('editRequestsCount').textContent = pendingRequests.length;
+            
+            if (pendingRequests.length === 0) {
+                editRequestsList.innerHTML = '<p class="text-muted">No pending edit requests.</p>';
+            } else {
+                editRequestsList.innerHTML = '';
+                pendingRequests.forEach(request => {
+                    const requestCard = document.createElement('div');
+                    requestCard.className = 'card request-card mb-3';
+                    requestCard.innerHTML = `
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h6 class="card-title">Edit Request for Entry #${request.entryId}</h6>
+                                    <p class="mb-1"><strong>Requested by:</strong> ${request.requestedByName}</p>
+                                    <p class="mb-1"><strong>Reason:</strong> ${request.reason}</p>
+                                    <p class="text-muted mb-0"><small>${formatMalaysiaDateTime(request.timestamp)}</small></p>
+                                </div>
+                                <div class="col-md-4 text-end">
+                                    <button class="btn btn-success me-2" onclick="approveEditRequest(${request.id})">
+                                        <i class="fas fa-check me-1"></i>Approve
+                                    </button>
+                                    <button class="btn btn-danger" onclick="rejectEditRequest(${request.id})">
+                                        <i class="fas fa-times me-1"></i>Reject
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    editRequestsList.appendChild(requestCard);
+                });
+            }
+            
+            // Load uncommitted entries
+            const uncommittedEntriesList = document.getElementById('uncommittedEntriesList');
+            const uncommittedEntries = logbookEntries.filter(e => !e.committed && e.uncommittedBy);
+            
+            document.getElementById('uncommittedCount').textContent = uncommittedEntries.length;
+            
+            if (uncommittedEntries.length === 0) {
+                uncommittedEntriesList.innerHTML = '<p class="text-muted">No entries awaiting re-commit approval.</p>';
+            } else {
+                uncommittedEntriesList.innerHTML = '';
+                uncommittedEntries.forEach(entry => {
+                    const entryCard = document.createElement('div');
+                    entryCard.className = 'card request-card mb-3';
+                    entryCard.innerHTML = `
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h6 class="card-title">Entry #${entry.id}</h6>
+                                    <p class="mb-1"><strong>PIC:</strong> ${entry.pic}</p>
+                                    <p class="mb-1"><strong>Destination:</strong> ${entry.destination}</p>
+                                    <p class="mb-1"><strong>Uncommitted by:</strong> ${users.find(u => u.id === entry.uncommittedBy)?.name || 'Unknown'}</p>
+                                    <p class="text-muted mb-0"><small>Uncommitted at: ${formatMalaysiaDateTime(entry.uncommittedAt)}</small></p>
+                                </div>
+                                <div class="col-md-4 text-end">
+                                    <button class="btn btn-success me-2" onclick="adminCommitEntry('${entry.id}')">
+                                        <i class="fas fa-check me-1"></i>Approve Commit
+                                    </button>
+                                    <button class="btn btn-primary" onclick="viewEntryDetails('${entry.id}')">
+                                        <i class="fas fa-eye me-1"></i>View Details
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    uncommittedEntriesList.appendChild(entryCard);
+                });
+            }
+            
+            updateAdminApprovalBadge();
+        }
+        
+        function rejectEditRequest(requestId) {
+            if (!confirm('Are you sure you want to reject this edit request?')) return;
+            
+            const request = editRequests.find(r => r.id === requestId);
+            if (request) {
+                // Update the request status
+                request.resolved = true;
+                request.resolvedBy = currentUser.id;
+                request.resolvedAt = getMalaysiaTime().toISOString();
+                request.status = 'rejected';
+                
+                // Sync the rejection to Google Sheets
+                if (isOnline) {
+                    syncEditRequestToGoogleSheets(request)
+                        .then(() => {
+                            logActivity('Reject Edit Request', `Edit request for entry #${request.entryId} rejected by ${currentUser.name}`);
+                            saveToLocalStorage();
+                            loadAdminApprovalsPage();
+                            showSuccessMessage('Edit request rejected and synced successfully!');
+                        })
+                        .catch(error => {
+                            debugLog('Failed to sync rejection: ' + error.message);
+                            logActivity('Reject Edit Request', `Edit request for entry #${request.entryId} rejected by ${currentUser.name}`);
+                            saveToLocalStorage();
+                            loadAdminApprovalsPage();
+                            showErrorMessage('Edit request rejected. Sync will happen when online.');
+                        });
+                } else {
+                    logActivity('Reject Edit Request', `Edit request for entry #${request.entryId} rejected by ${currentUser.name}`);
+                    saveToLocalStorage();
+                    loadAdminApprovalsPage();
+                    showSuccessMessage('Edit request rejected. Will sync when online.');
+                }
+            }
+        }
+        
+        function updateAdminApprovalBadge() {
+            if (!currentUser || currentUser.role !== 'admin') return;
+            
+            const pendingRequests = editRequests.filter(r => !r.resolved).length;
+            const uncommittedEntries = logbookEntries.filter(e => !e.committed && e.uncommittedBy).length;
+            const total = pendingRequests + uncommittedEntries;
+            
+            const badge = document.getElementById('adminApprovalBadge');
+            if (total > 0) {
+                badge.textContent = total;
+                badge.style.display = 'flex';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+        
+        // Utility Functions
+        function handlePhotoPreview() {
+            const file = document.getElementById('entryPhoto').files[0];
+            const preview = document.getElementById('photoPreview');
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.innerHTML = `<img src="${e.target.result}" class="photo-preview">`;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.innerHTML = '';
+            }
+        }
+        
+        function viewPhoto(photoSrc) {
+            document.getElementById('modalPhoto').src = photoSrc;
+            new bootstrap.Modal(document.getElementById('photoModal')).show();
+        }
+        
+        function logActivity(action, details) {
+            activityLogs.unshift({
+                action: action,
+                details: details,
+                user: currentUser.name,
+                userId: currentUser.id,
+                timestamp: getMalaysiaTime().toISOString()
+            });
+            saveToLocalStorage();
+        }
+        
+        function updateUI() {
+            if (currentUser) {
+                loadLogbookPage();
+                if (document.getElementById('usersPage').classList.contains('active')) {
+                    loadUsersPage();
+                }
+                if (document.getElementById('adminApprovalsPage').classList.contains('active')) {
+                    loadAdminApprovalsPage();
+                }
+                if (currentUser.role === 'admin') {
+                    updateAdminApprovalBadge();
+                }
+            }
+        }
+        
+        // Force sync function
+        function forceSync() {
+            if (!currentUser) return;
+            
+            if (!isOnline) {
+                showErrorMessage('You are offline. Cannot sync with Google Sheets.');
+                return;
+            }
+            
+            showSuccessMessage('Force sync initiated...');
+            loadDataFromGoogleSheets();
+        }
+        
+        // Google Sheets Integration Functions
+        function submitToGoogleSheet(entryData) {
+            debugLog('Submitting to Google Sheets:', entryData);
+            showSyncIndicator();
+            
+            const formData = new FormData();
+            formData.append('date', entryData.date || '');
+            formData.append('pic', entryData.pic || '');
+            formData.append('destination', entryData.destination || '');
+            formData.append('cashbill', entryData.cashbill || '');
+            formData.append('consignment', entryData.consignment || '');
+            formData.append('courierType', entryData.courierType || '');
+            formData.append('status', entryData.status || '');
+            formData.append('id', entryData.id || '');
+            formData.append('committed', entryData.committed);
+            formData.append('createdBy', entryData.createdBy || '');
+            formData.append('createdAt', entryData.createdAt || '');
+            formData.append('lastModified', entryData.lastModified || '');
+            formData.append('action', 'submit');
+            
+            fetch(GOOGLE_SHEETS_URL, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                debugLog('Google Sheets response status:', response.status);
+                return response.json();
+            })
+            .then(data => {
+                debugLog('Google Sheets response data:', data);
+                if (data.result === 'success') {
+                    console.log('Data submitted to Google Sheets successfully');
+                    hideSyncIndicator();
+                    lastSyncTime = new Date();
+                    showSuccessMessage('Entry created successfully and submitted to Google Sheets!');
+                } else {
+                    console.error('Error submitting to Google Sheets:', data.error);
+                    hideSyncIndicator();
+                    showErrorMessage('Error submitting to Google Sheets: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error submitting to Google Sheets:', error);
+                hideSyncIndicator();
+                showErrorMessage('Network error while submitting to Google Sheets');
+            });
+        }
+        
+        function updateGoogleSheet(entryData) {
+            showSyncIndicator();
+            
+            const formData = new FormData();
+            formData.append('date', entryData.date || '');
+            formData.append('pic', entryData.pic || '');
+            formData.append('destination', entryData.destination || '');
+            formData.append('cashbill', entryData.cashbill || '');
+            formData.append('consignment', entryData.consignment || '');
+            formData.append('courierType', entryData.courierType || '');
+            formData.append('status', entryData.status || '');
+            formData.append('id', entryData.id || '');
+            formData.append('committed', entryData.committed);
+            formData.append('createdBy', entryData.createdBy || '');
+            formData.append('createdAt', entryData.createdAt || '');
+            formData.append('lastModified', entryData.lastModified || '');
+            formData.append('action', 'update');
+            
+            // Add uncommit tracking if exists
+            if (entryData.uncommittedBy) {
+                formData.append('uncommittedBy', entryData.uncommittedBy);
+                formData.append('uncommittedAt', entryData.uncommittedAt);
+            }
+            
+            fetch(GOOGLE_SHEETS_URL, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    console.log('Data updated in Google Sheets successfully');
+                    hideSyncIndicator();
+                    lastSyncTime = new Date();
+                    showSuccessMessage('Entry updated in Google Sheets successfully!');
+                } else {
+                    console.error('Error updating Google Sheets:', data.error);
+                    hideSyncIndicator();
+                    showErrorMessage('Error updating Google Sheets: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error updating Google Sheets:', error);
+                hideSyncIndicator();
+                showErrorMessage('Network error while updating Google Sheets');
+            });
+        }
+        
+        function deleteFromGoogleSheet(entryData) {
+            showSyncIndicator();
+            
+            const formData = new FormData();
+            formData.append('id', entryData.id || '');
+            formData.append('action', 'delete');
+            
+            fetch(GOOGLE_SHEETS_URL, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    console.log('Data deleted from Google Sheets successfully');
+                    hideSyncIndicator();
+                    lastSyncTime = new Date();
+                    showSuccessMessage('Entry deleted from Google Sheets successfully!');
+                } else {
+                    console.error('Error deleting from Google Sheets:', data.error);
+                    hideSyncIndicator();
+                    showErrorMessage('Error deleting from Google Sheets: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting from Google Sheets:', error);
+                hideSyncIndicator();
+                showErrorMessage('Network error while deleting from Google Sheets');
+            });
+        }
+        
+        function loadDataFromGoogleSheets() {
+            if (!isOnline) {
+                loadFromLocalStorage();
+                showErrorMessage('You are offline. Loading data from local storage.');
+                return;
+            }
+            
+            showSyncIndicator();
+            
+            fetch(GOOGLE_SHEETS_URL + '?action=load_all&timestamp=' + Date.now())
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    const sheetData = data.data || [];
+                    const sheetEditRequests = data.editRequests || [];
+                    
+                    // Process logbook entries
+                    const existingEntriesMap = {};
+                    logbookEntries.forEach(entry => {
+                        existingEntriesMap[entry.id] = entry;
+                    });
+                    
+                    sheetData.forEach(row => {
+                        if (row.id && !existingEntriesMap[row.id]) {
+                            // Try to find the user by name if createdBy is not available
+                            let createdBy = row.createdBy || '';
+                            if (!createdBy && row.pic) {
+                                const user = users.find(u => u.name === row.pic);
+                                if (user) {
+                                    createdBy = user.id;
+                                }
+                            }
+                            
+                            const newEntry = {
+                                id: row.id,
+                                date: row.date || '',
+                                pic: row.pic || '',
+                                destination: row.destination || '',
+                                cashbill: row.cashbill || '',
+                                consignment: row.consignment || '',
+                                courierType: row.courierType || '',
+                                status: row.status || '',
+                                committed: row.committed === 'TRUE' || row.committed === true,
+                                createdBy: createdBy,
+                                createdAt: row.createdAt || '',
+                                lastModified: row.lastModified || ''
+                            };
+                            
+                            // Add uncommit tracking if exists
+                            if (row.uncommittedBy) {
+                                newEntry.uncommittedBy = row.uncommittedBy;
+                                newEntry.uncommittedAt = row.uncommittedAt;
+                            }
+                            
+                            logbookEntries.push(newEntry);
+                        }
+                    });
+                    
+                    // Process edit requests
+                    const existingRequestMap = {};
+                    editRequests.forEach(request => {
+                        existingRequestMap[request.id] = request;
+                    });
+                    
+                    sheetEditRequests.forEach(request => {
+                        if (!existingRequestMap[request.id]) {
+                            editRequests.push(request);
+                        } else {
+                            // Update existing request with server data
+                            const existingRequest = existingRequestMap[request.id];
+                            if (request.resolved && !existingRequest.resolved) {
+                                existingRequest.resolved = request.resolved;
+                                existingRequest.resolvedBy = request.resolvedBy;
+                                existingRequest.resolvedAt = request.resolvedAt;
+                                existingRequest.status = request.status;
+                                
+                                // Show notification if current user is affected
+                                if (request.requestedBy === currentUser.id) {
+                                    showSuccessMessage('Your edit request has been ' + (request.status || 'processed'));
+                                }
+                            }
+                        }
+                    });
+                    
+                    // Sort entries by creation date
+                    logbookEntries.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                    
+                    saveToLocalStorage();
+                    updateUI();
+                    hideSyncIndicator();
+                    lastSyncTime = new Date();
+                    showSuccessMessage('Data loaded from Google Sheets successfully!');
+                } else {
+                    console.error('Error syncing with Google Sheets:', data.error);
+                    hideSyncIndicator();
+                    showErrorMessage('Error syncing with Google Sheets: ' + data.error);
+                    loadFromLocalStorage();
+                }
+            })
+            .catch(error => {
+                console.error('Error syncing with Google Sheets:', error);
+                hideSyncIndicator();
+                showErrorMessage('Network error while syncing with Google Sheets');
+                loadFromLocalStorage();
+            });
+        }
+        
+        function syncWithGoogleSheets() {
+            if (!currentUser) return;
+            
+            if (!isOnline) {
+                showErrorMessage('You are offline. Cannot sync with Google Sheets.');
+                return;
+            }
+            
+            loadDataFromGoogleSheets();
+        }
+        
+        function showSyncIndicator() {
+            document.getElementById('syncIndicator').classList.add('show');
+        }
+        
+        function hideSyncIndicator() {
+            document.getElementById('syncIndicator').classList.remove('show');
+        }
+        
+        function showRealTimeIndicator() {
+            const indicator = document.getElementById('realTimeIndicator');
+            indicator.classList.add('show');
+            setTimeout(() => {
+                indicator.classList.remove('show');
+            }, 2000);
+        }
+        
+        function hideRealTimeIndicator() {
+            document.getElementById('realTimeIndicator').classList.remove('show');
+        }
+        
+        function showSuccessMessage(message) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = 'alert alert-success alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3';
+            alertDiv.style.zIndex = '9999';
+            alertDiv.innerHTML = `
+                <i class="fas fa-check-circle me-2"></i>${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.body.appendChild(alertDiv);
             
             setTimeout(() => {
-                notification.className = 'notification';
+                alertDiv.remove();
             }, 3000);
         }
         
-        // Toggle two-factor authentication section
-        twoFactorToggle.addEventListener('change', () => {
-            if (twoFactorToggle.checked) {
-                twoFactorSection.classList.remove('hidden');
-            } else {
-                twoFactorSection.classList.add('hidden');
-            }
-        });
-        
-        // OTP input handling
-        otpInputs.forEach((input, index) => {
-            input.addEventListener('input', (e) => {
-                if (e.target.value.length === 1) {
-                    if (index < otpInputs.length - 1) {
-                        otpInputs[index + 1].focus();
-                    }
-                }
-            });
+        function showErrorMessage(message) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = 'alert alert-danger alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3';
+            alertDiv.style.zIndex = '9999';
+            alertDiv.innerHTML = `
+                <i class="fas fa-exclamation-circle me-2"></i>${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.body.appendChild(alertDiv);
             
-            input.addEventListener('keydown', (e) => {
-                if (e.key === 'Backspace' && !e.target.value) {
-                    if (index > 0) {
-                        otpInputs[index - 1].focus();
-                    }
-                }
-            });
-        });
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 3000);
+        }
         
-        // Resend OTP
-        resendOtp.addEventListener('click', () => {
-            showNotification('New OTP sent to your device', 'info');
-        });
-        
-        // Get real IP address
-        async function getRealIP() {
+        // Storage Management
+        function saveToLocalStorage() {
             try {
-                const response = await fetch('https://api.ipify.org?format=json');
-                const data = await response.json();
-                userIP = data.ip;
-                
-                if (userIpElement) userIpElement.textContent = `Your IP: ${userIP}`;
-                if (adminIpElement) adminIpElement.textContent = `Your IP: ${userIP}`;
-                
-                return userIP;
+                const dataToSave = {
+                    users: users,
+                    logbookEntries: logbookEntries,
+                    deletedEntries: deletedEntries,
+                    editRequests: editRequests,
+                    activityLogs: activityLogs,
+                    entryRemarks: entryRemarks,
+                    lastSyncTime: lastSyncTime
+                };
+                localStorage.setItem('vmCourierData', JSON.stringify(dataToSave));
+                debugLog('Data saved to localStorage successfully');
             } catch (error) {
-                console.error('Error getting IP:', error);
-                return '127.0.0.1';
+                debugLog('Error saving to localStorage: ' + error.message);
+                console.error('Error saving to localStorage:', error);
             }
         }
         
-        // Update current time
-        function updateCurrentTime() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString();
-            
-            if (currentTimeElement) currentTimeElement.textContent = `Current Time: ${timeString}`;
-            if (adminTimeElement) adminTimeElement.textContent = `Current Time: ${timeString}`;
-        }
-        
-        // Login functionality
-        loginBtn.addEventListener('click', async () => {
-            const userId = document.getElementById('user-id').value;
-            const password = document.getElementById('password').value;
-            
-            if (!userId || !password) {
-                showNotification('Please enter both User ID and Password', 'error');
-                return;
-            }
-            
-            // Find user
-            const user = users.find(u => u.id === userId);
-            
-            if (!user) {
-                showNotification('Invalid User ID or Password', 'error');
-                return;
-            }
-            
-            if (user.password !== password) {
-                showNotification('Invalid User ID or Password', 'error');
-                return;
-            }
-            
-            // Check if two-factor is enabled
-            if (twoFactorToggle.checked) {
-                const otp = Array.from(otpInputs).map(input => input.value).join('');
-                if (otp.length !== 6) {
-                    showNotification('Please enter the complete 6-digit OTP', 'warning');
-                    return;
+        function loadFromLocalStorage() {
+            try {
+                const data = localStorage.getItem('vmCourierData');
+                if (data) {
+                    const parsed = JSON.parse(data);
+                    users = parsed.users || users;
+                    logbookEntries = parsed.logbookEntries || [];
+                    deletedEntries = parsed.deletedEntries || [];
+                    editRequests = parsed.editRequests || [];
+                    activityLogs = parsed.activityLogs || [];
+                    entryRemarks = parsed.entryRemarks || {};
+                    lastSyncTime = parsed.lastSyncTime || null;
+                    updateUI();
+                    debugLog('Data loaded from localStorage successfully');
                 }
-                
-                // In real system, verify OTP here
-                showNotification('Two-factor authentication successful', 'success');
-            }
-            
-            // Get real IP
-            await getRealIP();
-            
-            // Set current user
-            currentUser = user;
-            
-            // Log login
-            const loginLog = {
-                timestamp: new Date().toISOString(),
-                user: user.name,
-                action: 'System Login',
-                ip: userIP
-            };
-            auditLogData.unshift(loginLog);
-            localStorage.setItem('punch_audit_logs', JSON.stringify(auditLogData));
-            
-            // Update UI
-            document.getElementById('user-name').textContent = user.name;
-            document.getElementById('user-role').textContent = user.role;
-            
-            // Show appropriate section
-            if (user.role === 'Head of IT Development') {
-                loginSection.classList.add('hidden');
-                adminSection.classList.remove('hidden');
-                showNotification(`Welcome, ${user.name}! Full admin access granted.`, 'success');
-                
-                // Update admin dashboard
-                updateAdminDashboard();
-            } else {
-                loginSection.classList.add('hidden');
-                punchSection.classList.remove('hidden');
-                showNotification(`Punch-in successful. Welcome, ${user.name}!`, 'success');
-                
-                // Update attendance records
-                updateAttendanceRecords();
-            }
-            
-            // Update time
-            updateCurrentTime();
-            setInterval(updateCurrentTime, 1000);
-        });
-        
-        // Logout functionality
-        logoutBtn.addEventListener('click', () => {
-            currentUser = null;
-            punchSection.classList.add('hidden');
-            loginSection.classList.remove('hidden');
-            showNotification('You have been logged out successfully', 'info');
-        });
-        
-        adminLogoutBtn.addEventListener('click', () => {
-            currentUser = null;
-            adminSection.classList.add('hidden');
-            loginSection.classList.remove('hidden');
-            showNotification('You have been logged out successfully', 'info');
-        });
-        
-        // Punch in functionality
-        punchInBtn.addEventListener('click', () => {
-            if (!currentUser) return;
-            
-            const punchInTime = new Date().toISOString();
-            const punchInRecord = {
-                userId: currentUser.id,
-                date: new Date().toISOString().split('T')[0],
-                punchIn: punchInTime,
-                punchOut: null,
-                duration: null
-            };
-            
-            // Check if already punched in today
-            const existingRecord = attendanceData.find(a => 
-                a.userId === currentUser.id && 
-                a.date === new Date().toISOString().split('T')[0] &&
-                !a.punchOut
-            );
-            
-            if (existingRecord) {
-                showNotification('You are already punched in!', 'warning');
-                return;
-            }
-            
-            // Add new punch in record
-            attendanceData.push(punchInRecord);
-            localStorage.setItem('punch_attendance', JSON.stringify(attendanceData));
-            
-            // Log punch in
-            const punchInLog = {
-                timestamp: punchInTime,
-                user: currentUser.name,
-                action: 'Punch In',
-                ip: userIP
-            };
-            auditLogData.unshift(punchInLog);
-            localStorage.setItem('punch_audit_logs', JSON.stringify(auditLogData));
-            
-            showNotification(`Punch-in successful. Welcome, ${currentUser.name}!`, 'success');
-            updateAttendanceRecords();
-        });
-        
-        // Punch out functionality
-        punchOutBtn.addEventListener('click', () => {
-            if (!currentUser) return;
-            
-            const today = new Date().toISOString().split('T')[0];
-            const punchInRecord = attendanceData.find(a => 
-                a.userId === currentUser.id && 
-                a.date === today &&
-                !a.punchOut
-            );
-            
-            if (!punchInRecord) {
-                showNotification('You need to punch in first!', 'warning');
-                return;
-            }
-            
-            const punchOutTime = new Date().toISOString();
-            const punchInTime = new Date(punchInRecord.punchIn);
-            const durationMs = punchOutTime - punchInTime;
-            const hours = Math.floor(durationMs / (1000 * 60 * 60));
-            const minutes = Math.floor((durationMs % (1000 * 60 * 60)) / (1000 * 60));
-            const duration = `${hours}h ${minutes}m`;
-            
-            // Update punch out record
-            punchInRecord.punchOut = punchOutTime;
-            punchInRecord.duration = duration;
-            localStorage.setItem('punch_attendance', JSON.stringify(attendanceData));
-            
-            // Log punch out
-            const punchOutLog = {
-                timestamp: punchOutTime,
-                user: currentUser.name,
-                action: 'Punch Out',
-                ip: userIP
-            };
-            auditLogData.unshift(punchOutLog);
-            localStorage.setItem('punch_audit_logs', JSON.stringify(auditLogData));
-            
-            showNotification(`Punch-out successful. Goodbye, ${currentUser.name}!`, 'success');
-            updateAttendanceRecords();
-        });
-        
-        // Tab functionality
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const tabId = tab.getAttribute('data-tab');
-                
-                // Remove active class from all tabs and contents
-                tabs.forEach(t => t.classList.remove('active'));
-                tabContents.forEach(c => c.classList.remove('active'));
-                
-                // Add active class to clicked tab and corresponding content
-                tab.classList.add('active');
-                document.getElementById(tabId).classList.add('active');
-            });
-        });
-        
-        // Password strength meter
-        modalPassword.addEventListener('input', () => {
-            const password = modalPassword.value;
-            let strength = 0;
-            
-            if (password.length >= 8) strength += 25;
-            if (password.match(/[A-Z]/)) strength += 25;
-            if (password.match(/[0-9]/)) strength += 25;
-            if (password.match(/[^A-Za-z0-9]/)) strength += 25;
-            
-            strengthMeter.style.width = `${strength}%`;
-            
-            if (strength < 50) {
-                strengthMeter.style.background = '#e53e3e';
-                strengthText.textContent = 'Weak';
-            } else if (strength < 75) {
-                strengthMeter.style.background = '#d69e2e';
-                strengthText.textContent = 'Medium';
-            } else {
-                strengthMeter.style.background = '#38a169';
-                strengthText.textContent = 'Strong';
-            }
-        });
-        
-        // Modal functionality
-        function openModal(isEdit = false, userId = null) {
-            modalTitle.textContent = isEdit ? 'Edit User' : 'Add New User';
-            
-            if (isEdit && userId) {
-                const user = users.find(u => u.id === userId);
-                if (user) {
-                    document.getElementById('modal-user-id').value = user.id;
-                    document.getElementById('modal-name').value = user.name;
-                    document.getElementById('modal-role').value = user.role;
-                    document.getElementById('modal-department').value = user.department;
-                    document.getElementById('modal-password').value = user.password;
-                    modalTitle.textContent = `Edit User: ${user.name}`;
-                }
-            } else {
-                userForm.reset();
-                strengthMeter.style.width = '0';
-                strengthText.textContent = 'Password strength';
-            }
-            
-            userModal.style.display = 'flex';
-        }
-        
-        function closeModalFunc() {
-            userModal.style.display = 'none';
-        }
-        
-        closeModal.addEventListener('click', closeModalFunc);
-        cancelModal.addEventListener('click', closeModalFunc);
-        
-        // Save user
-        saveUserBtn.addEventListener('click', () => {
-            const userId = document.getElementById('modal-user-id').value;
-            const name = document.getElementById('modal-name').value;
-            const password = document.getElementById('modal-password').value;
-            const role = document.getElementById('modal-role').value;
-            const department = document.getElementById('modal-department').value;
-            
-            if (!userId || !name || !password) {
-                showNotification('Please fill in all required fields', 'error');
-                return;
-            }
-            
-            // Check if editing or adding
-            const existingUserIndex = users.findIndex(u => u.id === userId);
-            
-            if (existingUserIndex >= 0) {
-                // Edit existing user
-                users[existingUserIndex] = {
-                    ...users[existingUserIndex],
-                    name,
-                    password,
-                    role,
-                    department
-                };
-                
-                // Log user edit
-                const editLog = {
-                    timestamp: new Date().toISOString(),
-                    user: currentUser.name,
-                    action: `Edit User: ${name}`,
-                    ip: userIP
-                };
-                auditLogData.unshift(editLog);
-                localStorage.setItem('punch_audit_logs', JSON.stringify(auditLogData));
-                
-                showNotification(`User ${name} updated successfully`, 'success');
-            } else {
-                // Add new user
-                const newUser = {
-                    id: userId,
-                    name,
-                    password,
-                    role,
-                    department,
-                    status: 'active'
-                };
-                
-                users.push(newUser);
-                
-                // Log user creation
-                const createLog = {
-                    timestamp: new Date().toISOString(),
-                    user: currentUser.name,
-                    action: `Create User: ${name}`,
-                    ip: userIP
-                };
-                auditLogData.unshift(createLog);
-                localStorage.setItem('punch_audit_logs', JSON.stringify(auditLogData));
-                
-                showNotification(`User ${name} created successfully`, 'success');
-            }
-            
-            // Save to localStorage
-            localStorage.setItem('punch_users', JSON.stringify(users));
-            
-            // Update UI
-            updateAdminDashboard();
-            closeModalFunc();
-        });
-        
-        // Add user button
-        addUserBtn.addEventListener('click', () => {
-            openModal(false);
-        });
-        
-        // Edit user
-        function editUser(userId) {
-            openModal(true, userId);
-        }
-        
-        // Delete user
-        function deleteUser(userId) {
-            if (confirm('Are you sure you want to delete this user?')) {
-                const userIndex = users.findIndex(u => u.id === userId);
-                if (userIndex >= 0) {
-                    const userName = users[userIndex].name;
-                    users.splice(userIndex, 1);
-                    
-                    // Save to localStorage
-                    localStorage.setItem('punch_users', JSON.stringify(users));
-                    
-                    // Log user deletion
-                    const deleteLog = {
-                        timestamp: new Date().toISOString(),
-                        user: currentUser.name,
-                        action: `Delete User: ${userName}`,
-                        ip: userIP
-                    };
-                    auditLogData.unshift(deleteLog);
-                    localStorage.setItem('punch_audit_logs', JSON.stringify(auditLogData));
-                    
-                    showNotification(`User ${userName} deleted successfully`, 'success');
-                    
-                    // Update UI
-                    updateAdminDashboard();
-                }
+            } catch (error) {
+                debugLog('Error loading from localStorage: ' + error.message);
+                console.error('Error loading from localStorage:', error);
             }
         }
-        
-        // Reset password
-        function resetPassword(userId) {
-            const user = users.find(u => u.id === userId);
-            if (user) {
-                const newPassword = 'Password123!'; // In real system, generate secure password
-                user.password = newPassword;
-                
-                // Save to localStorage
-                localStorage.setItem('punch_users', JSON.stringify(users));
-                
-                // Log password reset
-                const resetLog = {
-                    timestamp: new Date().toISOString(),
-                    user: currentUser.name,
-                    action: `Reset Password: ${user.name}`,
-                    ip: userIP
-                };
-                auditLogData.unshift(resetLog);
-                localStorage.setItem('punch_audit_logs', JSON.stringify(auditLogData));
-                
-                showNotification(`Password reset for ${user.name}`, 'success');
-                
-                // Update UI
-                updateAdminDashboard();
-            }
-        }
-        
-        // Search users
-        searchUsers.addEventListener('input', () => {
-            const searchTerm = searchUsers.value.toLowerCase();
-            updateAdminDashboard(searchTerm);
-        });
-        
-        // Update admin dashboard
-        function updateAdminDashboard(searchTerm = '') {
-            // Update user list
-            userList.innerHTML = '';
-            
-            const filteredUsers = searchTerm 
-                ? users.filter(u => 
-                    u.id.toLowerCase().includes(searchTerm) || 
-                    u.name.toLowerCase().includes(searchTerm) || 
-                    u.role.toLowerCase().includes(searchTerm) ||
-                    u.department.toLowerCase().includes(searchTerm)
-                ) 
-                : users;
-            
-            filteredUsers.forEach(user => {
-                const userItem = document.createElement('div');
-                userItem.className = 'user-item';
-                userItem.innerHTML = `
-                    <div class="user-avatar">${user.name.charAt(0)}</div>
-                    <div class="user-info">
-                        <div class="user-name">${user.name}</div>
-                        <div class="user-role">${user.role} - ${user.department}</div>
-                    </div>
-                    <div class="action-buttons">
-                        <button class="action-btn view" onclick="viewUser('${user.id}')">View</button>
-                        <button class="action-btn edit" onclick="editUser('${user.id}')">Edit</button>
-                        <button class="action-btn reset" onclick="resetPassword('${user.id}')">Reset</button>
-                        <button class="action-btn delete" onclick="deleteUser('${user.id}')">Delete</button>
-                    </div>
-                `;
-                userList.appendChild(userItem);
-            });
-            
-            // Update department stats
-            departmentStats.innerHTML = '';
-            
-            const departments = [...new Set(users.map(u => u.department))];
-            departments.forEach(dept => {
-                const deptUsers = users.filter(u => u.department === dept);
-                const totalHours = attendanceData
-                    .filter(a => deptUsers.some(u => u.id === a.userId))
-                    .reduce((total, a) => total + (a.duration ? parseInt(a.duration.split('h')[0]) : 0), 0);
-                
-                const avgHours = deptUsers.length > 0 ? (totalHours / deptUsers.length).toFixed(1) : 0;
-                
-                const status = avgHours >= 8 ? 'active' : 'inactive';
-                const statusText = avgHours >= 8 ? 'Good' : 'Below Target';
-                
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${dept}</td>
-                    <td>${totalHours}</td>
-                    <td>${avgHours}</td>
-                    <td><span class="status ${status}">${statusText}</span></td>
-                `;
-                departmentStats.appendChild(row);
-            });
-            
-            // Update audit logs
-            auditLogs.innerHTML = '';
-            
-            auditLogData.slice(0, 10).forEach(log => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${new Date(log.timestamp).toLocaleString()}</td>
-                    <td>${log.user}</td>
-                    <td>${log.action}</td>
-                    <td>${log.ip}</td>
-                `;
-                auditLogs.appendChild(row);
-            });
-            
-            // Update stats
-            document.getElementById('total-users').textContent = users.length;
-            document.getElementById('on-time-rate').textContent = '87%';
-            document.getElementById('recent-alerts').textContent = '3';
-        }
-        
-        // Update attendance records
-        function updateAttendanceRecords() {
-            attendanceRecords.innerHTML = '';
-            
-            const userAttendance = attendanceData
-                .filter(a => a.userId === currentUser.id)
-                .sort((a, b) => new Date(b.date) - new Date(a.date));
-            
-            userAttendance.forEach(record => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${record.date}</td>
-                    <td>${record.punchIn ? new Date(record.punchIn).toLocaleTimeString() : '-'}</td>
-                    <td>${record.punchOut ? new Date(record.punchOut).toLocaleTimeString() : '-'}</td>
-                    <td>${record.duration || '-'}</td>
-                `;
-                attendanceRecords.appendChild(row);
-            });
-        }
-        
-        // Global functions for user management
-        window.editUser = editUser;
-        window.deleteUser = deleteUser;
-        window.resetPassword = resetPassword;
-        window.viewUser = function(userId) {
-            const user = users.find(u => u.id === userId);
-            if (user) {
-                alert(`User Details:\nID: ${user.id}\nName: ${user.name}\nRole: ${user.role}\nDepartment: ${user.department}`);
-            }
-        };
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', async () => {
-            // Get real IP
-            await getRealIP();
-            
-            // Update time
-            updateCurrentTime();
-            setInterval(updateCurrentTime, 1000);
-        });
     </script>
 </body>
 </html>
